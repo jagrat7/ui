@@ -38,7 +38,9 @@ export async function getItemSource(item: RegistryItem) {
   return Promise.all(
     item.files.map(async (file) => {
       const relative = path.relative("registry", file.path)
-      const code = await fs.readFile(path.join(process.cwd(), "registry", relative), "utf8")
+      const source = await fs.readFile(path.join(process.cwd(), "registry", relative), "utf8")
+      // Keep the preview and clipboard framework-neutral; installed files retain the RSC boundary.
+      const code = source.replace(/^(?:"use client"|'use client');?\r?\n(?:\r?\n)?/, "")
       const html = await highlightCode(code, file.path.endsWith(".css") ? "css" : "tsx")
       return { name: path.basename(file.path), code, html }
     }),
