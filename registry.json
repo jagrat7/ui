@@ -36,7 +36,6 @@
       "type": "registry:component",
       "title": "Audio Visualizer",
       "description": "A mirrored waveform built on audvis, with an idle strip, reduced-motion support, and optional frequency samples.",
-      "docs": "audvis, motion, and the cn utility are installed automatically. Import AudioVisualizer from your components directory and pass a caller-owned AnalyserNode or frequencyData (0–255) with isActive. For microphone input, use useAudioAnalyser from audvis in a client component; microphone access requires HTTPS or localhost and browser permission. See https://ui.jr7.dev/#audio-visualizer for a setup example.",
       "dependencies": ["audvis", "motion"],
       "registryDependencies": ["utils"],
       "files": [

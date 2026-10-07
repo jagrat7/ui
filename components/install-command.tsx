@@ -23,6 +23,13 @@ const RUNNERS: Record<PackageManager, string> = {
   bun: "bunx --bun",
 }
 
+const INSTALLERS: Record<PackageManager, string> = {
+  npm: "npm install",
+  pnpm: "pnpm add",
+  deno: "deno add",
+  bun: "bun add",
+}
+
 const ICONS: Record<PackageManager, React.ReactNode> = {
   npm: (
     <svg viewBox="0 0 24 24" className="size-4" aria-hidden="true">
@@ -64,11 +71,27 @@ const ICONS: Record<PackageManager, React.ReactNode> = {
   ),
 }
 
-export function InstallCommand({ url, id }: { url: string; id: string }) {
+export function InstallCommand({
+  url,
+  id,
+  dependencies = [],
+}: {
+  url: string
+  id: string
+  dependencies?: readonly string[]
+}) {
   const [stored, setPm] = useAtom(packageManagerAtom)
   const pm = stored in RUNNERS ? stored : "npm"
   const packageName = pm === "deno" ? "npm:shadcn@latest" : "shadcn@latest"
-  const command = `${RUNNERS[pm]} ${packageName} add ${url}`
+  const packages = dependencies
+    .filter((dependency) => dependency !== "lucide-react")
+    .map((dependency) => (pm === "deno" ? `npm:${dependency}` : dependency))
+    .join(" ")
+  const installDependencies = packages ? `${INSTALLERS[pm]} ${packages}` : ""
+  const installComponent = `${RUNNERS[pm]} ${packageName} add ${url}`
+  const command = installDependencies
+    ? `${installDependencies} &&\n${installComponent}`
+    : installComponent
 
   return (
     <div className="overflow-hidden rounded-xl border bg-background/50">
@@ -100,6 +123,13 @@ export function InstallCommand({ url, id }: { url: string; id: string }) {
       </div>
       <pre className="overflow-x-auto p-4 font-mono text-sm leading-relaxed">
         <code>
+          {installDependencies && (
+            <>
+              <span className="text-(--code-token-keyword)">{INSTALLERS[pm]}</span>{" "}
+              <span className="text-(--code-token-string)">{packages}</span>
+              {" &&\n"}
+            </>
+          )}
           <span className="text-(--code-token-keyword)">{RUNNERS[pm]}</span>{" "}
           <span className="text-(--code-token-function)">{packageName}</span>{" "}
           <span className="text-(--code-token-comment)">add</span>{" "}

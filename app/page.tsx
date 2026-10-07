@@ -2,7 +2,6 @@ import { getItemSource, items } from "@/lib/registry"
 import { SITE } from "@/lib/site"
 import { demos } from "@/components/demos"
 import { ComponentPreview } from "@/components/component-preview"
-import { AudioVisualizerSetup } from "@/components/audio-visualizer-setup"
 import { InstallCommand } from "@/components/install-command"
 import {
   Panel,
@@ -32,8 +31,11 @@ export default async function Home() {
               </PanelHeader>
               <PanelContent className="space-y-4">
                 <ComponentPreview preview={Demo ? <Demo /> : null} files={sources[i]} />
-                <InstallCommand id={item.name} url={`${SITE.url}/r/${item.name}.json`} />
-                {item.name === "audio-visualizer" && <AudioVisualizerSetup />}
+                <InstallCommand
+                  id={item.name}
+                  url={`${SITE.url}/r/${item.name}.json`}
+                  dependencies={item.dependencies}
+                />
               </PanelContent>
             </Panel>
           </div>
