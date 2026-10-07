@@ -1,10 +1,6 @@
 # jr7/ui
 
-A single-page showcase and [shadcn registry](https://ui.shadcn.com/docs/registry) for my components.
-
-[Explore the components and live demos at ui.jr7.dev](https://ui.jr7.dev).
-
-The registry contains a few my own components that I have struggled to find elsewhere.
+The registry and showcase that contains a few my own components that I have struggled to find elsewhere.
 
 ## Components
 
