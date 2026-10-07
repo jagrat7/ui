@@ -4,7 +4,7 @@ A single-page showcase and [shadcn registry](https://ui.shadcn.com/docs/registry
 
 [Explore the components and live demos at ui.jr7.dev](https://ui.jr7.dev).
 
-The registry contains four React components for async actions, page navigation, audio visualization, and inline errors. Install their source into your project, then customize the styling and behavior as needed. All four are client components and use Tailwind CSS with your project's shadcn theme tokens.
+The registry contains a few my own components that I have struggled to find elsewhere.
 
 ## Components
 
@@ -225,3 +225,12 @@ pnpm registry:build
 ```
 
 `pnpm build` regenerates the registry and builds the Next.js showcase. Component metadata and dependencies are defined in [`registry.json`](registry.json); interactive examples live in [`components/demos`](components/demos).
+
+## Credits
+
+Thanks to the projects that contributed code, design ideas, and building blocks:
+
+- [chanhdai.com](https://github.com/ncdai/chanhdai.com): the panel layout was adapted from this MIT-licensed project. Its page dividers and circular theme reveal also inspired the showcase design.
+- [VengeanceUI](https://github.com/Ashutoshx7/VengeanceUI): the package manager picker in the install commands was adapted from this MIT-licensed project.
+- [shadcn/ui](https://ui.shadcn.com): provides the base UI components and the registry tooling used to distribute these components.
+- **Commit Mono**, by Eigil Nikolajsen: the showcase's monospace font, distributed under the SIL Open Font License 1.1. See the [bundled font license](app/fonts/CommitMono-LICENSE.txt).
