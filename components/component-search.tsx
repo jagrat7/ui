@@ -57,7 +57,6 @@ export function ComponentSearch({ items }: { items: ComponentEntry[] }) {
         className="gap-2 bg-background/40 font-mono text-muted-foreground"
       >
         <SearchIcon />
-        <span className="max-sm:hidden">Search components</span>
         <KbdGroup className="max-sm:hidden">
           <Kbd>{isMac ? "⌘" : "Ctrl"}</Kbd>
           <Kbd>K</Kbd>
