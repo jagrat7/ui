@@ -65,7 +65,7 @@ const ICONS: Record<PackageManager, React.ReactNode> = {
       alt=""
       width={20}
       height={18}
-      className="size-5 shrink-0 object-contain"
+      className="size-5 max-w-none shrink-0 object-contain"
       aria-hidden="true"
     />
   ),
