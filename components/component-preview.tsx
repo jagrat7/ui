@@ -53,7 +53,7 @@ export function ComponentPreview({
             <CopyButton text={file.code} />
           </div>
           <div
-            className="max-h-[480px] overflow-auto text-[13px] leading-relaxed [&_pre]:p-4"
+            className="max-h-[480px] overflow-auto font-mono text-sm leading-relaxed [&_code]:font-mono [&_pre]:p-4 [&_pre]:font-mono"
             dangerouslySetInnerHTML={{ __html: file.html }}
           />
         </div>

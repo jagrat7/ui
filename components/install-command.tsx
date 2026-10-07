@@ -100,10 +100,10 @@ export function InstallCommand({ url, id }: { url: string; id: string }) {
       </div>
       <pre className="overflow-x-auto p-4 font-mono text-sm leading-relaxed">
         <code>
-          <span className="text-[#6b6b99] dark:text-[#a0a0cc]">{RUNNERS[pm]}</span>{" "}
-          <span className="text-cyan-800 dark:text-[#8bb8d0]">shadcn@latest</span>{" "}
-          <span className="text-muted-foreground">add</span>{" "}
-          <span className="text-[#8a6d3b] dark:text-[#c9a87c]">{url}</span>
+          <span className="text-(--code-token-keyword)">{RUNNERS[pm]}</span>{" "}
+          <span className="text-(--code-token-function)">shadcn@latest</span>{" "}
+          <span className="text-(--code-token-comment)">add</span>{" "}
+          <span className="text-(--code-token-string)">{url}</span>
         </code>
       </pre>
     </div>

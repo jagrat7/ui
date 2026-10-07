@@ -41,9 +41,44 @@
   --shadow-lg:
     0rem 0.8rem 2.2rem -0.35rem hsl(220 28% 38% / 0.24), 0rem 4px 6px -1.2px hsl(220 28% 38% / 0.14);
   --header-height: --spacing(14);
+
+  /* One Dark Pro palette, paired with One Light colors in light mode.
+     Shared by source previews and install commands. */
+  --code-background: transparent;
+  --code-foreground: #383a42;
+  --code-token-keyword: #a626a4;
+  --code-token-function: #4078f2;
+  --code-token-string: #50a14f;
+  --code-token-comment: #696c77;
+  --code-token-comment-muted: #a0a1a7;
+  --code-token-constant: #c18401;
+  --code-token-number: #986801;
+  --code-token-parameter: #e45649;
+  --code-token-cyan: #0184bc;
+  --code-token-bright: #000000;
+  --code-token-invalid: #ca1243;
+  --code-token-string-expression: var(--code-token-string);
+  --code-token-punctuation: var(--code-foreground);
+  --code-token-link: var(--code-token-function);
+  --code-token-inserted: var(--code-token-string);
+  --code-token-deleted: #e45649;
+  --code-token-changed: var(--code-token-number);
 }
 
 .dark {
+  --code-foreground: #abb2bf;
+  --code-token-keyword: #c678dd;
+  --code-token-function: #61afef;
+  --code-token-string: #98c379;
+  --code-token-comment: #7f848e;
+  --code-token-comment-muted: #5c6370;
+  --code-token-constant: #e5c07b;
+  --code-token-number: #d19a66;
+  --code-token-parameter: #e06c75;
+  --code-token-cyan: #56b6c2;
+  --code-token-bright: #ffffff;
+  --code-token-invalid: #f44747;
+  --code-token-deleted: #be5046;
   --background: oklch(0.15 0.018 250);
   --foreground: oklch(0.96 0.008 95);
   --card: oklch(0.2 0.022 250 / 0.72);
@@ -168,15 +203,6 @@
   ::selection {
     @apply bg-primary text-primary-foreground;
   }
-}
-
-/* Shiki dual themes */
-html.dark .shiki,
-html.dark .shiki span {
-  color: var(--shiki-dark) !important;
-}
-.shiki {
-  background-color: transparent !important;
 }
 
 @keyframes drift {
