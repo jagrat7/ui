@@ -1,6 +1,8 @@
 "use client"
 
 import * as React from "react"
+import { useAtom } from "jotai"
+import { atomWithStorage } from "jotai/utils"
 import { motion } from "motion/react"
 
 import { cn } from "@/lib/utils"
@@ -9,6 +11,9 @@ import { CopyButton } from "@/components/copy-button"
 // Package manager picker adapted from VengeanceUI (MIT) — https://github.com/Ashutoshx7/VengeanceUI
 
 type PackageManager = "npm" | "pnpm" | "yarn" | "bun"
+
+// Shared by every install command on the page and remembered across visits.
+const packageManagerAtom = atomWithStorage<PackageManager>("package-manager", "npm")
 
 const RUNNERS: Record<PackageManager, string> = {
   npm: "npx",
@@ -61,7 +66,8 @@ const ICONS: Record<PackageManager, React.ReactNode> = {
 }
 
 export function InstallCommand({ url, id }: { url: string; id: string }) {
-  const [pm, setPm] = React.useState<PackageManager>("npm")
+  const [stored, setPm] = useAtom(packageManagerAtom)
+  const pm = stored in RUNNERS ? stored : "npm"
   const command = `${RUNNERS[pm]} shadcn@latest add ${url}`
 
   return (
