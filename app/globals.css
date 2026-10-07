@@ -3,59 +3,58 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Palette, glass surfaces and shadows from jr7.dev (portfolioV2). */
+/* Warm paper in light mode; glass surfaces in dark mode from jr7.dev (portfolioV2). */
 
 :root {
   --radius: 0.75rem;
-  --background: oklch(0.97 0.01 95);
-  --foreground: oklch(0.18 0.02 250);
-  --card: oklch(0.99 0.005 95 / 0.72);
-  --card-foreground: oklch(0.18 0.02 250);
+  --background: oklch(0.95 0.025 85);
+  --foreground: oklch(0.28 0.018 65);
+  --card: oklch(0.97 0.02 85 / 0.8);
+  --card-foreground: oklch(0.28 0.018 65);
   --surface-blur: 15px;
-  --popover: oklch(0.99 0.005 95 / 0.86);
-  --popover-foreground: oklch(0.18 0.02 250);
-  --primary: oklch(0.45 0.11 255);
-  --primary-foreground: oklch(0.98 0.005 95);
-  --secondary: oklch(0.92 0.02 250);
-  --secondary-foreground: oklch(0.26 0.03 250);
-  --muted: oklch(0.93 0.015 250);
-  --muted-foreground: oklch(0.48 0.03 250);
-  --accent: oklch(0.92 0.02 250);
-  --accent-foreground: oklch(0.18 0.02 250);
+  --popover: oklch(0.97 0.02 85 / 0.94);
+  --popover-foreground: oklch(0.28 0.018 65);
+  --primary: oklch(0.45 0.075 255);
+  --primary-foreground: oklch(0.97 0.02 85);
+  --secondary: oklch(0.91 0.025 85);
+  --secondary-foreground: oklch(0.34 0.018 65);
+  --muted: oklch(0.92 0.022 85);
+  --muted-foreground: oklch(0.48 0.018 65);
+  --accent: oklch(0.9 0.025 85);
+  --accent-foreground: oklch(0.28 0.018 65);
   --destructive: oklch(0.6 0.18 20);
-  --border: oklch(0.78 0.03 250 / 0.32);
-  --line: oklch(0.78 0.03 250 / 0.4);
-  --input: oklch(0.86 0.02 250);
-  --ring: oklch(0.52 0.12 255);
+  --border: oklch(0.67 0.025 75 / 0.24);
+  --line: oklch(0.67 0.025 75 / 0.3);
+  --input: oklch(0.84 0.025 85);
+  --ring: oklch(0.52 0.085 255);
   --chart-1: oklch(0.52 0.12 255);
   --chart-2: oklch(0.72 0.11 165);
   --chart-3: oklch(0.64 0.13 35);
   --chart-4: oklch(0.58 0.13 310);
   --chart-5: oklch(0.76 0.12 85);
-  --glow-1: #92dbe0;
-  --glow-2: #0b7bff;
-  --glow-3: #3865cf;
-  --glow-opacity: 0.4;
+  --glow-1: oklch(0.78 0.09 80 / 0.26);
+  --glow-2: oklch(0.76 0.045 155 / 0.16);
+  --glow-3: oklch(0.8 0.065 45 / 0.2);
   --shadow-sm:
-    0rem 0.5rem 1.5rem -0.35rem hsl(220 28% 38% / 0.2), 0rem 1px 2px -1.2px hsl(220 28% 38% / 0.14);
+    0rem 0.5rem 1.5rem -0.35rem hsl(35 20% 30% / 0.1), 0rem 1px 2px -1.2px hsl(35 20% 30% / 0.08);
   --shadow-lg:
-    0rem 0.8rem 2.2rem -0.35rem hsl(220 28% 38% / 0.24), 0rem 4px 6px -1.2px hsl(220 28% 38% / 0.14);
+    0rem 0.8rem 2.2rem -0.35rem hsl(35 20% 30% / 0.12), 0rem 4px 6px -1.2px hsl(35 20% 30% / 0.08);
   --header-height: --spacing(14);
 
   /* One Dark Pro palette, paired with One Light colors in light mode.
      Shared by source previews and install commands. */
   --code-background: transparent;
-  --code-foreground: #383a42;
+  --code-foreground: #403b34;
   --code-token-keyword: #a626a4;
   --code-token-function: #4078f2;
   --code-token-string: #50a14f;
-  --code-token-comment: #696c77;
-  --code-token-comment-muted: #a0a1a7;
+  --code-token-comment: #756e63;
+  --code-token-comment-muted: #867e72;
   --code-token-constant: #c18401;
   --code-token-number: #986801;
   --code-token-parameter: #e45649;
   --code-token-cyan: #0184bc;
-  --code-token-bright: #000000;
+  --code-token-bright: #2f2a24;
   --code-token-invalid: #ca1243;
   --code-token-string-expression: var(--code-token-string);
   --code-token-punctuation: var(--code-foreground);
@@ -103,7 +102,9 @@
   --chart-3: oklch(0.72 0.14 35);
   --chart-4: oklch(0.7 0.13 310);
   --chart-5: oklch(0.8 0.12 85);
-  --glow-opacity: 0.22;
+  --glow-1: oklch(0.55 0.09 250 / 0.2);
+  --glow-2: oklch(0.5 0.065 190 / 0.14);
+  --glow-3: oklch(0.48 0.08 285 / 0.16);
   --shadow-sm:
     0rem 0.5rem 1.5rem -0.2rem hsl(250 70% 3% / 0.5), 0rem 1px 2px -1.2px hsl(250 70% 3% / 0.5);
   --shadow-lg:
@@ -225,10 +226,26 @@
   }
 }
 
-@keyframes drift {
+/* Broad edge washes leave the reading area quiet; gradients supply the softness. */
+.glow-background::before {
+  content: "";
+  position: absolute;
+  inset: -6%;
+  background:
+    radial-gradient(ellipse 65% 65% at 5% 5%, var(--glow-1), transparent 75%),
+    radial-gradient(ellipse 55% 70% at 100% 45%, var(--glow-2), transparent 75%),
+    radial-gradient(ellipse 70% 55% at 35% 105%, var(--glow-3), transparent 75%);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .glow-background::before {
+    animation: glow-drift 44s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes glow-drift {
   to {
-    translate: 6vmax 4vmax;
-    scale: 1.1;
+    transform: translate(1.5%, -1%) scale(1.035);
   }
 }
 
