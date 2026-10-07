@@ -37,20 +37,31 @@ export function ComponentPreview({
 
       <TabsContent value="code">
         <div className="overflow-hidden rounded-xl border bg-background/50">
-          <div className="flex items-center gap-1 border-b pr-1 pl-2">
-            <div className="flex flex-1 gap-1 overflow-x-auto py-1.5">
-              {files.map((f, i) => (
-                <button
-                  key={f.name}
-                  onClick={() => setActive(i)}
-                  data-active={i === active}
-                  className="rounded-md px-2 py-1 font-mono text-xs text-muted-foreground data-[active=true]:bg-muted data-[active=true]:text-foreground"
+          <div className="flex min-h-12 items-center gap-3 border-b bg-muted/20 pr-3 pl-4">
+            <div className="flex min-w-0 flex-1 items-center gap-4 overflow-x-auto">
+              {files.length === 1 ? (
+                <span
+                  className="min-w-0 truncate py-3 font-mono text-xs text-foreground/85"
+                  title={file.name}
                 >
-                  {f.name}
-                </button>
-              ))}
+                  {file.name}
+                </span>
+              ) : (
+                files.map((f, i) => (
+                  <button
+                    key={f.name}
+                    type="button"
+                    onClick={() => setActive(i)}
+                    aria-pressed={i === active}
+                    data-active={i === active}
+                    className="shrink-0 border-b-2 border-transparent py-3 font-mono text-xs whitespace-nowrap text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring data-[active=true]:border-primary data-[active=true]:text-foreground"
+                  >
+                    {f.name}
+                  </button>
+                ))
+              )}
             </div>
-            <CopyButton text={file.code} />
+            <CopyButton text={file.code} className="shrink-0" />
           </div>
           <div
             className="max-h-[480px] overflow-auto font-mono text-sm leading-relaxed [&_code]:font-mono [&_pre]:p-4 [&_pre]:font-mono"
