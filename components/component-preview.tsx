@@ -1,22 +1,26 @@
-"use client"
-
-import * as React from "react"
+import type { ReactNode } from "react"
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { CopyButton } from "@/components/copy-button"
 
 type SourceFile = { name: string; code: string; html: string }
 
+function HighlightedSource({ html }: { html: string }) {
+  return (
+    <div
+      className="max-h-[480px] overflow-auto font-mono text-sm leading-relaxed [&_code]:font-mono [&_pre]:p-4 [&_pre]:font-mono"
+      dangerouslySetInnerHTML={{ __html: html }}
+    />
+  )
+}
+
 export function ComponentPreview({
-  preview,
+  children,
   files,
 }: {
-  preview: React.ReactNode
+  children: ReactNode
   files: SourceFile[]
 }) {
-  const [active, setActive] = React.useState(0)
-  const file = files[active]
-
   return (
     <Tabs defaultValue="preview" className="gap-3">
       <TabsList variant="line">
@@ -31,43 +35,52 @@ export function ComponentPreview({
             aria-hidden
             className="absolute inset-0 -z-1 dot-grid mask-[radial-gradient(ellipse_at_center,transparent_35%,black_85%)]"
           />
-          {preview}
+          {children}
         </div>
       </TabsContent>
 
       <TabsContent value="code">
-        <div className="overflow-hidden rounded-xl border bg-background/50">
-          <div className="flex min-h-12 items-center gap-3 border-b bg-muted/20 pr-3 pl-4">
-            <div className="flex min-w-0 flex-1 items-center gap-4 overflow-x-auto">
-              {files.length === 1 ? (
-                <span
-                  className="min-w-0 truncate py-3 font-mono text-xs text-foreground/85"
-                  title={file.name}
-                >
-                  {file.name}
-                </span>
-              ) : (
-                files.map((f, i) => (
-                  <button
-                    key={f.name}
-                    type="button"
-                    onClick={() => setActive(i)}
-                    aria-pressed={i === active}
-                    data-active={i === active}
-                    className="shrink-0 border-b-2 border-transparent py-3 font-mono text-xs whitespace-nowrap text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring data-[active=true]:border-primary data-[active=true]:text-foreground"
-                  >
-                    {f.name}
-                  </button>
-                ))
-              )}
+        {files.length === 1 ? (
+          <div className="overflow-hidden rounded-xl border bg-background/50">
+            <div className="flex min-h-12 items-center gap-3 border-b bg-muted/20 pr-3 pl-4">
+              <span
+                className="min-w-0 flex-1 truncate py-3 font-mono text-xs text-foreground/85"
+                title={files[0].name}
+              >
+                {files[0].name}
+              </span>
+              <CopyButton text={files[0].code} className="shrink-0" />
             </div>
-            <CopyButton text={file.code} className="shrink-0" />
+            <HighlightedSource html={files[0].html} />
           </div>
-          <div
-            className="max-h-[480px] overflow-auto font-mono text-sm leading-relaxed [&_code]:font-mono [&_pre]:p-4 [&_pre]:font-mono"
-            dangerouslySetInnerHTML={{ __html: file.html }}
-          />
-        </div>
+        ) : (
+          <Tabs
+            defaultValue={files[0]?.name}
+            className="relative gap-0 overflow-hidden rounded-xl border bg-background/50"
+          >
+            <div className="flex min-h-12 items-center gap-3 border-b bg-muted/20 pr-12 pl-4">
+              <div className="flex min-w-0 flex-1 items-center gap-4 overflow-x-auto">
+                <TabsList variant="line" aria-label="Source files" className="h-auto gap-4 p-0">
+                  {files.map((file) => (
+                    <TabsTrigger
+                      key={file.name}
+                      value={file.name}
+                      className="shrink-0 rounded-none py-3 font-mono text-xs"
+                    >
+                      {file.name}
+                    </TabsTrigger>
+                  ))}
+                </TabsList>
+              </div>
+            </div>
+            {files.map((file) => (
+              <TabsContent key={file.name} value={file.name}>
+                <CopyButton text={file.code} className="absolute top-2.5 right-3" />
+                <HighlightedSource html={file.html} />
+              </TabsContent>
+            ))}
+          </Tabs>
+        )}
       </TabsContent>
     </Tabs>
   )

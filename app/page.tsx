@@ -30,7 +30,7 @@ export default async function Home() {
                 <PanelDescription>{item.description}</PanelDescription>
               </PanelHeader>
               <PanelContent className="space-y-4">
-                <ComponentPreview preview={Demo ? <Demo /> : null} files={sources[i]} />
+                <ComponentPreview files={sources[i]}>{Demo ? <Demo /> : null}</ComponentPreview>
                 <InstallCommand id={item.name} url={`${SITE.url}/r/${item.name}.json`} />
               </PanelContent>
             </Panel>
