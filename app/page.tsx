@@ -17,31 +17,11 @@ export default async function Home() {
 
   return (
     <div className="mx-auto md:max-w-3xl">
-      <Panel>
-        <PanelContent className="space-y-3 py-10">
-          <h1 className="font-mono text-3xl font-medium tracking-tight">
-            <span className="text-muted-foreground">jr7/</span>ui
-          </h1>
-          <p className="max-w-xl text-balance text-muted-foreground">{SITE.description}</p>
-        </PanelContent>
-        <nav className="screen-line-top flex flex-wrap gap-x-4 gap-y-1 px-4 py-3 font-mono text-sm">
-          {items.map((item) => (
-            <a
-              key={item.name}
-              href={`#${item.name}`}
-              className="text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-            >
-              {item.name}
-            </a>
-          ))}
-        </nav>
-      </Panel>
-
       {items.map((item, i) => {
         const Demo = demos[item.name]
         return (
           <div key={item.name}>
-            <Separator />
+            {i > 0 && <Separator />}
             <Panel id={item.name} className="scroll-mt-(--header-height)">
               <PanelHeader className="space-y-1">
                 <PanelTitle>
@@ -59,15 +39,12 @@ export default async function Home() {
       })}
 
       <Separator />
-      <footer className="screen-line-top border-x px-4 py-6 font-mono text-xs text-muted-foreground">
-        <a href={SITE.home} className="hover:text-foreground">
-          jr7.dev
-        </a>
-        {" · "}
+      <footer className="screen-line-top screen-line-bottom flex gap-4 border-x glass px-4 py-6 font-mono text-xs text-muted-foreground">
         <a href={`${SITE.url}/r/registry.json`} className="hover:text-foreground">
           registry.json
         </a>
       </footer>
+      <Separator className="h-16" />
     </div>
   )
 }
