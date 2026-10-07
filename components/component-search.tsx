@@ -5,6 +5,7 @@ import { SearchIcon } from "lucide-react"
 
 import type { ComponentEntry } from "@/lib/components-index"
 import { Button } from "@/components/ui/button"
+import { Kbd, KbdGroup } from "@/components/ui/kbd"
 import {
   CommandDialog,
   CommandEmpty,
@@ -39,12 +40,16 @@ export function ComponentSearch({ items }: { items: ComponentEntry[] }) {
       <Button
         variant="outline"
         size="sm"
+        aria-label="Search components"
         onClick={() => setOpen(true)}
         className="gap-2 bg-background/40 font-mono text-muted-foreground"
       >
         <SearchIcon />
         <span className="max-sm:hidden">Search components</span>
-        <kbd className="rounded border bg-muted px-1 text-[10px] max-sm:hidden">⌘K</kbd>
+        <KbdGroup className="max-sm:hidden">
+          <Kbd>⌘</Kbd>
+          <Kbd>K</Kbd>
+        </KbdGroup>
       </Button>
       <CommandDialog
         open={open}
