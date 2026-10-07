@@ -1,0 +1,63 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "jr7",
+  "homepage": "https://ui.jr7.dev",
+  "items": [
+    {
+      "name": "numbered-pagination",
+      "type": "registry:component",
+      "title": "Numbered Pagination",
+      "description": "Controlled page navigation with nearby pages, first/last links, ellipses, and a fetching state.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["button", "utils"],
+      "files": [
+        {
+          "path": "registry/jr7/numbered-pagination/numbered-pagination.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "loading-button",
+      "type": "registry:component",
+      "title": "Loading Button",
+      "description": "A shadcn button with a spinner, loading label, and enforced busy/disabled state.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["button", "utils"],
+      "files": [
+        {
+          "path": "registry/jr7/loading-button/loading-button.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "audio-visualizer",
+      "type": "registry:component",
+      "title": "Audio Visualizer",
+      "description": "A mirrored waveform built on audvis, with an idle strip, reduced-motion support, and optional frequency samples.",
+      "dependencies": ["audvis", "motion"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "registry/jr7/audio-visualizer/audio-visualizer.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "error-message",
+      "type": "registry:component",
+      "title": "Error Message",
+      "description": "An animated, dismissible inline error with a configurable auto-dismiss timeout.",
+      "dependencies": ["motion", "lucide-react"],
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "registry/jr7/error-message/error-message.tsx",
+          "type": "registry:component"
+        }
+      ]
+    }
+  ]
+}
