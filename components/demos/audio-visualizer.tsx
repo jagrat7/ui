@@ -96,12 +96,6 @@ export default function AudioVisualizerDemo() {
     return () => cancelAnimationFrame(frame)
   }, [isActive, simulated, reduceMotion])
 
-  const hint = reduceMotion
-    ? "Reduced motion enabled."
-    : usingMicrophone
-      ? "Speak · audio stays local."
-      : null
-
   return (
     <Demo
       caption={
@@ -164,13 +158,11 @@ export default function AudioVisualizerDemo() {
             usingMicrophone ? "Live microphone frequency spectrum" : "Simulated frequency spectrum"
           }
         />
-        {microphone.status === "error" ? (
+        {microphone.status === "error" && (
           <p role="alert" className="text-center text-sm text-destructive">
             {microphone.message}
           </p>
-        ) : hint ? (
-          <p className="text-center text-xs text-muted-foreground">{hint}</p>
-        ) : null}
+        )}
       </div>
     </Demo>
   )
