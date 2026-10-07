@@ -10,7 +10,7 @@ export interface ErrorMessageProps {
   message: string | null
   setMessage: (message: string | null) => void
   className?: string
-  /** Auto-dismiss after this many milliseconds; 0 disables it. Defaults to 8000. */
+  /** Auto-dismiss after this many milliseconds; 0 disables it. Defaults to 5000. */
   autoDismissTimeout?: number
 }
 
@@ -18,7 +18,7 @@ export function ErrorMessage({
   message,
   setMessage,
   className,
-  autoDismissTimeout = 8000,
+  autoDismissTimeout = 5000,
 }: ErrorMessageProps) {
   const reduceMotion = useReducedMotion()
 
@@ -39,7 +39,7 @@ export function ErrorMessage({
           exit={{ opacity: 0 }}
           transition={{ duration: reduceMotion ? 0 : 0.3 }}
           className={cn(
-            "group relative mb-2 flex items-center justify-between gap-2 rounded-md px-3 py-2 text-sm text-destructive",
+            "relative mb-2 flex items-center justify-between gap-2 rounded-lg border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive",
             className,
           )}
         >
@@ -50,7 +50,7 @@ export function ErrorMessage({
           <button
             type="button"
             onClick={() => setMessage(null)}
-            className="shrink-0 rounded-sm p-1 opacity-100 transition-opacity duration-200 hover:text-destructive/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring motion-reduce:transition-none sm:opacity-0 sm:group-focus-within:opacity-100 sm:group-hover:opacity-100"
+            className="shrink-0 rounded-sm p-1 opacity-70 transition-opacity duration-200 hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring motion-reduce:transition-none"
             aria-label="Close error message"
           >
             <X className="size-4" aria-hidden="true" />

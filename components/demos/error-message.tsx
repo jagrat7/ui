@@ -12,7 +12,7 @@ export default function ErrorMessageDemo() {
   return (
     <div className="w-full max-w-lg space-y-3">
       <div className="min-h-14">
-        <ErrorMessage message={message} setMessage={setMessage} autoDismissTimeout={8000} />
+        <ErrorMessage message={message} setMessage={setMessage} />
       </div>
       <Button
         type="button"
@@ -23,7 +23,7 @@ export default function ErrorMessageDemo() {
         Show error again
       </Button>
       <p className="text-sm text-muted-foreground">
-        Dismiss the message, or let it close after eight seconds.
+        Dismiss the message, or let it close after five seconds.
       </p>
     </div>
   )
