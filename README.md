@@ -1,6 +1,10 @@
 # jr7/ui
 
-The registry and showcase that contains a few my own components that I have struggled to find elsewhere.
+A registry and showcase that contains a few my own components that I have struggled to find elsewhere.
+
+[![Component demos: pagination, loading button, audio visualizer, and error dismissal](docs/media/showcase.gif)](https://ui.jr7.dev)
+
+[Try the live demos](https://ui.jr7.dev) · [Download the video](docs/media/showcase.mp4)
 
 ## Components
 
