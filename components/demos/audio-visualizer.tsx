@@ -35,7 +35,7 @@ export default function AudioVisualizerDemo() {
   }, [isActive, reduceMotion])
 
   return (
-    <div className="flex w-full max-w-xl items-center gap-3 rounded-2xl border border-border bg-background p-4 text-foreground">
+    <div className="flex w-full max-w-xl items-center gap-3 rounded-2xl border border-border bg-card p-4 text-card-foreground">
       <Button
         type="button"
         variant="secondary"

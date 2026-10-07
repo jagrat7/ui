@@ -9,7 +9,7 @@ export default function NumberedPaginationDemo() {
   const resultsPerPage = 12
 
   return (
-    <div className="w-full space-y-5 rounded-xl border border-border bg-background p-6 text-foreground">
+    <div className="w-full space-y-5 rounded-xl border border-border bg-card p-6 text-card-foreground">
       <div className="flex items-center justify-between gap-3">
         <p className="font-medium">Wallpaper collection</p>
         <p className="text-sm text-muted-foreground" aria-live="polite">

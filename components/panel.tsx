@@ -3,12 +3,13 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 
 // Panel layout adapted from chanhdai.com (MIT) — https://github.com/ncdai/chanhdai.com
+// Panels are frosted so the glow background reads through the column.
 
 function Panel({ className, ...props }: React.ComponentProps<"section">) {
   return (
     <section
       data-slot="panel"
-      className={cn("screen-line-top screen-line-bottom border-x", className)}
+      className={cn("screen-line-top screen-line-bottom border-x glass", className)}
       {...props}
     />
   )

@@ -65,8 +65,8 @@ export function InstallCommand({ url, id }: { url: string; id: string }) {
   const command = `${RUNNERS[pm]} shadcn@latest add ${url}`
 
   return (
-    <div className="overflow-hidden rounded-lg border bg-muted/30">
-      <div className="flex items-center justify-between border-b bg-background px-3 py-1.5">
+    <div className="overflow-hidden rounded-xl border bg-background/50">
+      <div className="flex items-center justify-between border-b px-3 py-1.5">
         <div className="flex items-center gap-1 sm:gap-3">
           {(Object.keys(RUNNERS) as PackageManager[]).map((key) => (
             <button

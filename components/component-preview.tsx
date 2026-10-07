@@ -25,13 +25,18 @@ export function ComponentPreview({
       </TabsList>
 
       <TabsContent value="preview">
-        <div className="flex min-h-72 items-center justify-center rounded-lg border dot-grid p-6 sm:p-10">
+        <div className="relative isolate flex min-h-72 items-center justify-center overflow-hidden rounded-xl border bg-background/80 p-6 sm:p-10">
+          {/* Dots fade out toward the centre so they don't compete with the component. */}
+          <div
+            aria-hidden
+            className="absolute inset-0 -z-1 dot-grid mask-[radial-gradient(ellipse_at_center,transparent_35%,black_85%)]"
+          />
           {preview}
         </div>
       </TabsContent>
 
       <TabsContent value="code">
-        <div className="overflow-hidden rounded-lg border">
+        <div className="overflow-hidden rounded-xl border bg-background/50">
           <div className="flex items-center gap-1 border-b pr-1 pl-2">
             <div className="flex flex-1 gap-1 overflow-x-auto py-1.5">
               {files.map((f, i) => (
