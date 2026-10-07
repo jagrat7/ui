@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import Image from "next/image"
 import { useAtom } from "jotai"
 import { atomWithStorage } from "jotai/utils"
 import { motion } from "motion/react"
@@ -10,7 +11,7 @@ import { CopyButton } from "@/components/copy-button"
 
 // Package manager picker adapted from VengeanceUI (MIT) — https://github.com/Ashutoshx7/VengeanceUI
 
-type PackageManager = "npm" | "pnpm" | "yarn" | "bun"
+type PackageManager = "npm" | "pnpm" | "deno" | "bun"
 
 // Shared by every install command on the page and remembered across visits.
 const packageManagerAtom = atomWithStorage<PackageManager>("package-manager", "npm")
@@ -18,7 +19,7 @@ const packageManagerAtom = atomWithStorage<PackageManager>("package-manager", "n
 const RUNNERS: Record<PackageManager, string> = {
   npm: "npx",
   pnpm: "pnpm dlx",
-  yarn: "yarn dlx",
+  deno: "deno run -A",
   bun: "bunx --bun",
 }
 
@@ -39,36 +40,35 @@ const ICONS: Record<PackageManager, React.ReactNode> = {
       />
     </svg>
   ),
-  yarn: (
-    <svg viewBox="0 0 24 24" className="size-4" aria-hidden="true">
+  deno: (
+    <svg
+      viewBox="0 0 24 24"
+      className="size-4.5 shrink-0 text-emerald-600 dark:text-emerald-400"
+      aria-hidden="true"
+    >
       <path
-        d="M12 0C5.375 0 0 5.375 0 12s5.375 12 12 12 12-5.375 12-12S18.625 0 12 0zm.768 4.105c.183 0 .363.053.525.157.125.083.287.185.755 1.154.31-.088.468-.042.551-.019.204.056.366.19.463.375.477.917.542 2.553.334 3.605-.241 1.232-.755 2.029-1.131 2.576.324.329.778.899 1.117 1.825.278.774.31 1.478.273 2.015a5.51 5.51 0 0 0 .602-.329c.593-.366 1.487-.917 2.553-.931.714-.009 1.269.445 1.353 1.103a1.23 1.23 0 0 1-.945 1.362c-.649.158-.95.278-1.821.843-1.232.797-2.539 1.242-3.012 1.39a1.686 1.686 0 0 1-.704.343c-.737.181-3.266.315-3.466.315h-.046c-.783 0-1.214-.241-1.45-.491-.658.329-1.51.19-2.122-.134a1.078 1.078 0 0 1-.58-1.153 1.243 1.243 0 0 1-.153-.195c-.162-.25-.528-.936-.454-1.946.056-.723.556-1.367.88-1.71a5.522 5.522 0 0 1 .408-2.256c.306-.727.885-1.348 1.32-1.737-.32-.537-.644-1.367-.329-2.21.227-.602.412-.936.82-1.08h-.005c.199-.074.389-.153.486-.259a3.418 3.418 0 0 1 2.298-1.103c.037-.093.079-.185.125-.283.31-.658.639-1.029 1.024-1.168a.94.94 0 0 1 .328-.06z"
-        fill="#2C8EBB"
+        d="M1.105 18.02A11.9 11.9 0 0 1 0 12.985q0-.698.078-1.376a12 12 0 0 1 .231-1.34A12 12 0 0 1 4.025 4.02a12 12 0 0 1 5.46-2.771 12 12 0 0 1 3.428-.23c1.452.112 2.825.477 4.077 1.05a12 12 0 0 1 2.78 1.774 12.02 12.02 0 0 1 4.053 7.078A12 12 0 0 1 24 12.985q0 .454-.036.914a12 12 0 0 1-.728 3.305 12 12 0 0 1-2.38 3.875c-1.33 1.357-3.02 1.962-4.43 1.936a4.4 4.4 0 0 1-2.724-1.024c-.99-.853-1.391-1.83-1.53-2.919a5 5 0 0 1 .128-1.518c.105-.38.37-1.116.76-1.437-.455-.197-1.04-.624-1.226-.829-.045-.05-.04-.13 0-.183a.155.155 0 0 1 .177-.053c.392.134.869.267 1.372.35.66.111 1.484.25 2.317.292 2.03.1 4.153-.813 4.812-2.627s.403-3.609-1.96-4.685-3.454-2.356-5.363-3.128c-1.247-.505-2.636-.205-4.06.582-3.838 2.121-7.277 8.822-5.69 15.032a.191.191 0 0 1-.315.19 12 12 0 0 1-1.25-1.634 12 12 0 0 1-.769-1.404M11.57 6.087c.649-.051 1.214.501 1.31 1.236.13.979-.228 1.99-1.41 2.013-1.01.02-1.315-.997-1.248-1.614.066-.616.574-1.575 1.35-1.635"
+        fill="currentColor"
       />
     </svg>
   ),
   bun: (
-    <svg viewBox="0 0 80 70" className="size-4" aria-hidden="true">
-      <path
-        d="M71.09 20.74c-.16-.17-.33-.34-.5-.5s-.33-.34-.5-.5c-.12-.12-.24-.24-.37-.35a17.89 17.89 0 0 0-2.4-1.87c-.55-.35-1.12-.68-1.71-1a38.16 38.16 0 0 0-16.93-4.18h-.25c-5.6 0-11.13 1.45-16.12 4.18-.59.32-1.16.65-1.71 1a18.11 18.11 0 0 0-2.4 1.87c-.13.11-.24.23-.37.35-.17.16-.34.33-.5.5s-.34.33-.5.5a16.21 16.21 0 0 0-4 10.69 15.78 15.78 0 0 0 .18 2.37c.9 7.03 5.75 13.05 12.73 16.9.35.19.7.38 1.06.55a38.16 38.16 0 0 0 16.12 4.19h.25a38.16 38.16 0 0 0 16.93-4.18c.36-.18.71-.36 1.06-.55 7-3.86 11.84-9.87 12.73-16.9a15.78 15.78 0 0 0 .18-2.37 16.21 16.21 0 0 0-4-10.69z"
-        fill="#FBEDDC"
-      />
-      <path
-        d="M26.18 31.09a3.09 3.09 0 0 1 3-3.19 3.09 3.09 0 0 1 3 3.19 3.09 3.09 0 0 1-3 3.19 3.09 3.09 0 0 1-3-3.19zm15 0a3.09 3.09 0 0 1 3-3.19 3.09 3.09 0 0 1 3 3.19 3.09 3.09 0 0 1-3 3.19 3.09 3.09 0 0 1-3-3.19z"
-        fill="#3E3E3E"
-      />
-      <path
-        d="M38.16 38.42c-3.5 0-6.24 2.1-6.24 4.77s2.74 4.77 6.24 4.77 6.24-2.1 6.24-4.77-2.74-4.77-6.24-4.77z"
-        fill="#F59794"
-      />
-    </svg>
+    <Image
+      src="/icons/bun.svg"
+      alt=""
+      width={20}
+      height={18}
+      className="size-5 shrink-0 object-contain"
+      aria-hidden="true"
+    />
   ),
 }
 
 export function InstallCommand({ url, id }: { url: string; id: string }) {
   const [stored, setPm] = useAtom(packageManagerAtom)
   const pm = stored in RUNNERS ? stored : "npm"
-  const command = `${RUNNERS[pm]} shadcn@latest add ${url}`
+  const packageName = pm === "deno" ? "npm:shadcn@latest" : "shadcn@latest"
+  const command = `${RUNNERS[pm]} ${packageName} add ${url}`
 
   return (
     <div className="overflow-hidden rounded-xl border bg-background/50">
@@ -91,7 +91,7 @@ export function InstallCommand({ url, id }: { url: string; id: string }) {
                   transition={{ type: "spring", stiffness: 300, damping: 30 }}
                 />
               )}
-              {ICONS[key]}
+              <span className="flex size-4 shrink-0 items-center justify-center">{ICONS[key]}</span>
               {key}
             </button>
           ))}
@@ -101,7 +101,7 @@ export function InstallCommand({ url, id }: { url: string; id: string }) {
       <pre className="overflow-x-auto p-4 font-mono text-sm leading-relaxed">
         <code>
           <span className="text-(--code-token-keyword)">{RUNNERS[pm]}</span>{" "}
-          <span className="text-(--code-token-function)">shadcn@latest</span>{" "}
+          <span className="text-(--code-token-function)">{packageName}</span>{" "}
           <span className="text-(--code-token-comment)">add</span>{" "}
           <span className="text-(--code-token-string)">{url}</span>
         </code>
