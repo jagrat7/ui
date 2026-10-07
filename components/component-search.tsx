@@ -15,19 +15,30 @@ import {
   CommandList,
 } from "@/components/ui/command"
 
+// The platform is fixed for the session; keep the server-rendered label deterministic.
+function subscribeToPlatform() {
+  return () => {}
+}
+
+function getIsMac() {
+  return /Macintosh|Mac OS X|iPhone|iPad|iPod/.test(navigator.userAgent)
+}
+
 export function ComponentSearch({ items }: { items: ComponentEntry[] }) {
   const [open, setOpen] = React.useState(false)
+  const isMac = React.useSyncExternalStore(subscribeToPlatform, getIsMac, () => false)
 
   React.useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
-      if (event.key === "k" && (event.metaKey || event.ctrlKey)) {
+      const shortcutModifier = isMac ? event.metaKey : event.ctrlKey
+      if (event.key.toLowerCase() === "k" && shortcutModifier) {
         event.preventDefault()
         setOpen((current) => !current)
       }
     }
     document.addEventListener("keydown", onKeyDown)
     return () => document.removeEventListener("keydown", onKeyDown)
-  }, [])
+  }, [isMac])
 
   function go(name: string) {
     setOpen(false)
@@ -41,13 +52,14 @@ export function ComponentSearch({ items }: { items: ComponentEntry[] }) {
         variant="outline"
         size="sm"
         aria-label="Search components"
+        aria-keyshortcuts={isMac ? "Meta+K" : "Control+K"}
         onClick={() => setOpen(true)}
         className="gap-2 bg-background/40 font-mono text-muted-foreground"
       >
         <SearchIcon />
         <span className="max-sm:hidden">Search components</span>
         <KbdGroup className="max-sm:hidden">
-          <Kbd>⌘</Kbd>
+          <Kbd>{isMac ? "⌘" : "Ctrl"}</Kbd>
           <Kbd>K</Kbd>
         </KbdGroup>
       </Button>
