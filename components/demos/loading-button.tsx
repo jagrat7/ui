@@ -1,7 +1,10 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { Check, Save } from "lucide-react"
+import { Check, RotateCcw, Save } from "lucide-react"
+
+import { Button } from "@/components/ui/button"
+import { Demo } from "@/components/demo"
 import { LoadingButton } from "@/registry/jr7/loading-button/loading-button"
 
 export default function LoadingButtonDemo() {
@@ -16,6 +19,13 @@ export default function LoadingButtonDemo() {
     [],
   )
 
+  function reset() {
+    if (timer.current !== null) clearTimeout(timer.current)
+    timer.current = null
+    setIsLoading(false)
+    setSaved(false)
+  }
+
   function save() {
     setSaved(false)
     setIsLoading(true)
@@ -27,27 +37,25 @@ export default function LoadingButtonDemo() {
   }
 
   return (
-    <div className="flex flex-wrap items-center gap-4">
-      <LoadingButton
-        type="button"
-        isLoading={isLoading}
-        loadingText="Saving changes..."
-        onClick={save}
-      >
-        {saved ? (
-          <Check className="size-4" aria-hidden="true" />
-        ) : (
-          <Save className="size-4" aria-hidden="true" />
-        )}
+    <Demo
+      caption={isLoading ? "isLoading: true" : saved ? "Saved" : "Click to simulate a 1.5s save"}
+      actions={
+        <Button
+          variant="ghost"
+          size="xs"
+          className="font-mono"
+          onClick={reset}
+          disabled={!isLoading && !saved}
+        >
+          <RotateCcw />
+          Reset
+        </Button>
+      }
+    >
+      <LoadingButton type="button" isLoading={isLoading} loadingText="Saving…" onClick={save}>
+        {saved ? <Check aria-hidden="true" /> : <Save aria-hidden="true" />}
         {saved ? "Saved" : "Save changes"}
       </LoadingButton>
-      <span className="text-sm text-muted-foreground" role="status">
-        {saved
-          ? "Your preferences have been saved."
-          : isLoading
-            ? "Saving preferences…"
-            : "Try saving your preferences."}
-      </span>
-    </div>
+    </Demo>
   )
 }

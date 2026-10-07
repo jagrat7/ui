@@ -1,27 +1,26 @@
 "use client"
 
 import { useState } from "react"
+
+import { Demo } from "@/components/demo"
 import { NumberedPagination } from "@/registry/jr7/numbered-pagination/numbered-pagination"
+
+const TOTAL_RESULTS = 240
+const RESULTS_PER_PAGE = 12
 
 export default function NumberedPaginationDemo() {
   const [page, setPage] = useState(5)
-  const totalResults = 240
-  const resultsPerPage = 12
+  const first = (page - 1) * RESULTS_PER_PAGE + 1
+  const last = Math.min(page * RESULTS_PER_PAGE, TOTAL_RESULTS)
 
   return (
-    <div className="w-full space-y-5 rounded-xl border border-border bg-card p-6 text-card-foreground">
-      <div className="flex items-center justify-between gap-3">
-        <p className="font-medium">Wallpaper collection</p>
-        <p className="text-sm text-muted-foreground" aria-live="polite">
-          {(page - 1) * resultsPerPage + 1}–{page * resultsPerPage} of {totalResults}
-        </p>
-      </div>
+    <Demo caption={`page ${page} · showing ${first}–${last} of ${TOTAL_RESULTS}`}>
       <NumberedPagination
         page={page}
-        totalResults={totalResults}
-        resultsPerPage={resultsPerPage}
+        totalResults={TOTAL_RESULTS}
+        resultsPerPage={RESULTS_PER_PAGE}
         onPageChange={setPage}
       />
-    </div>
+    </Demo>
   )
 }

@@ -25,7 +25,7 @@ export function ComponentPreview({
       </TabsList>
 
       <TabsContent value="preview">
-        <div className="relative isolate flex min-h-72 items-center justify-center overflow-hidden rounded-xl border bg-background/80 p-6 sm:p-10">
+        <div className="relative isolate flex min-h-72 flex-col overflow-hidden rounded-xl border bg-background/80">
           {/* Dots fade out toward the centre so they don't compete with the component. */}
           <div
             aria-hidden

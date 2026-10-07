@@ -5,6 +5,7 @@ import { Pause, Play } from "lucide-react"
 import { useReducedMotion } from "motion/react"
 
 import { Button } from "@/components/ui/button"
+import { Demo } from "@/components/demo"
 import { AudioVisualizer } from "@/registry/jr7/audio-visualizer/audio-visualizer"
 
 export default function AudioVisualizerDemo() {
@@ -35,33 +36,27 @@ export default function AudioVisualizerDemo() {
   }, [isActive, reduceMotion])
 
   return (
-    <div className="flex w-full max-w-xl items-center gap-3 rounded-2xl border border-border bg-card p-4 text-card-foreground">
-      <Button
-        type="button"
-        variant="secondary"
-        size="icon"
-        className="size-14 shrink-0 rounded-sm sm:size-16"
-        aria-label={isActive ? "Pause simulated waveform" : "Play simulated waveform"}
-        onClick={() => setIsActive((current) => !current)}
-      >
-        {isActive ? (
-          <Pause className="size-4 fill-current" aria-hidden="true" />
-        ) : (
-          <Play className="size-4 fill-current" aria-hidden="true" />
-        )}
-      </Button>
-      <div className="min-w-0 flex-1">
-        <p className="text-base/tight font-semibold">Midnight drive</p>
-        <p className="mt-0.5 text-sm/tight text-muted-foreground">
-          Simulated audio · no microphone required
-        </p>
-        <AudioVisualizer
-          isActive={isActive}
-          frequencyData={frequencyData}
-          ariaLabel="Simulated frequency spectrum"
-          className="mt-2"
-        />
-      </div>
-    </div>
+    <Demo
+      caption="Simulated audio · no microphone needed"
+      actions={
+        <Button
+          variant="ghost"
+          size="xs"
+          className="font-mono"
+          onClick={() => setIsActive((current) => !current)}
+        >
+          {isActive ? <Pause className="fill-current" /> : <Play className="fill-current" />}
+          {isActive ? "Pause" : "Play"}
+        </Button>
+      }
+    >
+      <AudioVisualizer
+        isActive={isActive}
+        frequencyData={frequencyData}
+        height={48}
+        ariaLabel="Simulated frequency spectrum"
+        className="max-w-md"
+      />
+    </Demo>
   )
 }
