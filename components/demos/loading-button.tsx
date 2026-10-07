@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react"
 import { Check, RotateCcw, Save } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-import { Demo } from "@/components/demo"
+import { Demo, DemoStage, DemoFooter, DemoCaption, DemoActions } from "@/components/demo"
 import { LoadingButton } from "@/registry/jr7/loading-button/loading-button"
 
 export default function LoadingButtonDemo() {
@@ -37,25 +37,30 @@ export default function LoadingButtonDemo() {
   }
 
   return (
-    <Demo
-      caption={isLoading ? "isLoading: true" : saved ? "Saved" : "Click to simulate a 1.5s save"}
-      actions={
-        <Button
-          variant="ghost"
-          size="xs"
-          className="font-mono"
-          onClick={reset}
-          disabled={!isLoading && !saved}
-        >
-          <RotateCcw />
-          Reset
-        </Button>
-      }
-    >
-      <LoadingButton type="button" isLoading={isLoading} loadingText="Saving…" onClick={save}>
-        {saved ? <Check aria-hidden="true" /> : <Save aria-hidden="true" />}
-        {saved ? "Saved" : "Save changes"}
-      </LoadingButton>
+    <Demo>
+      <DemoStage>
+        <LoadingButton type="button" isLoading={isLoading} loadingText="Saving…" onClick={save}>
+          {saved ? <Check aria-hidden="true" /> : <Save aria-hidden="true" />}
+          {saved ? "Saved" : "Save changes"}
+        </LoadingButton>
+      </DemoStage>
+      <DemoFooter>
+        <DemoCaption>
+          {isLoading ? "isLoading: true" : saved ? "Saved" : "Click to simulate a 1.5s save"}
+        </DemoCaption>
+        <DemoActions>
+          <Button
+            variant="ghost"
+            size="xs"
+            className="font-mono"
+            onClick={reset}
+            disabled={!isLoading && !saved}
+          >
+            <RotateCcw />
+            Reset
+          </Button>
+        </DemoActions>
+      </DemoFooter>
     </Demo>
   )
 }

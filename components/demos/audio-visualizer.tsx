@@ -6,7 +6,7 @@ import { useReducedMotion } from "motion/react"
 
 import { microphoneErrorMessage, openMicrophone } from "@/lib/microphone"
 import { Button } from "@/components/ui/button"
-import { Demo } from "@/components/demo"
+import { Demo, DemoStage, DemoFooter, DemoCaption, DemoActions } from "@/components/demo"
 import { AudioVisualizer } from "@/registry/jr7/audio-visualizer/audio-visualizer"
 
 type MicrophoneState =
@@ -16,10 +16,8 @@ type MicrophoneState =
 
 export default function AudioVisualizerDemo() {
   const [isActive, setIsActive] = useState(true)
-  const [frequencyData, setFrequencyData] = useState<number[]>([])
   const [microphone, setMicrophone] = useState<MicrophoneState>({ status: "idle" })
   const microphoneRequest = useRef<AbortController | null>(null)
-  const reduceMotion = useReducedMotion()
   const usingMicrophone = microphone.status === "live"
   const waitingForMicrophone = microphone.status === "requesting"
   const simulated = !usingMicrophone && !waitingForMicrophone
@@ -74,44 +72,41 @@ export default function AudioVisualizerDemo() {
     }
   }
 
-  useEffect(() => {
-    if (!isActive || !simulated || reduceMotion) return
-    let frame = 0
-    let lastUpdate = 0
-    function animate(time: number) {
-      if (time - lastUpdate >= 50) {
-        lastUpdate = time
-        setFrequencyData(
-          Array.from({ length: 256 }, (_, index) => {
-            const envelope = Math.exp(-index / 100)
-            const pulse = 0.5 + 0.5 * Math.sin(time / 450 + index * 0.18)
-            const beat = 0.5 + 0.5 * Math.sin(time / 170 - index * 0.08)
-            return Math.round(18 + 170 * envelope * pulse * beat)
-          }),
-        )
-      }
-      frame = requestAnimationFrame(animate)
-    }
-    frame = requestAnimationFrame(animate)
-    return () => cancelAnimationFrame(frame)
-  }, [isActive, simulated, reduceMotion])
-
   return (
-    <Demo
-      caption={
-        usingMicrophone ? (
-          <span className="inline-flex items-center gap-1.5">
-            <span aria-hidden="true" className="size-1.5 rounded-full bg-emerald-500" />
-            Microphone
-          </span>
-        ) : waitingForMicrophone ? (
-          "Allow microphone access…"
-        ) : (
-          "Simulated audio"
-        )
-      }
-      actions={
-        <>
+    <Demo>
+      <DemoStage>
+        <div className="flex w-full max-w-md flex-col items-center gap-6">
+          {usingMicrophone ? (
+            <AudioVisualizer
+              isActive
+              analyser={microphone.analyser}
+              height={48}
+              ariaLabel="Live microphone frequency spectrum"
+            />
+          ) : (
+            <SimulatedWaveform isActive={simulated && isActive} />
+          )}
+          {microphone.status === "error" && (
+            <p role="alert" className="text-center text-sm text-destructive">
+              {microphone.message}
+            </p>
+          )}
+        </div>
+      </DemoStage>
+      <DemoFooter>
+        <DemoCaption>
+          {usingMicrophone ? (
+            <span className="inline-flex items-center gap-1.5">
+              <span aria-hidden="true" className="size-1.5 rounded-full bg-emerald-500" />
+              Microphone
+            </span>
+          ) : waitingForMicrophone ? (
+            "Allow microphone access…"
+          ) : (
+            "Simulated audio"
+          )}
+        </DemoCaption>
+        <DemoActions>
           {simulated && (
             <Button
               type="button"
@@ -145,25 +140,45 @@ export default function AudioVisualizerDemo() {
                 ? "Stop microphone"
                 : "Use microphone"}
           </Button>
-        </>
-      }
-    >
-      <div className="flex w-full max-w-md flex-col items-center gap-6">
-        <AudioVisualizer
-          isActive={usingMicrophone || (simulated && isActive)}
-          analyser={usingMicrophone ? microphone.analyser : null}
-          frequencyData={simulated ? frequencyData : undefined}
-          height={48}
-          ariaLabel={
-            usingMicrophone ? "Live microphone frequency spectrum" : "Simulated frequency spectrum"
-          }
-        />
-        {microphone.status === "error" && (
-          <p role="alert" className="text-center text-sm text-destructive">
-            {microphone.message}
-          </p>
-        )}
-      </div>
+        </DemoActions>
+      </DemoFooter>
     </Demo>
+  )
+}
+
+// Keep the 20 Hz sample updates local to the waveform, rather than the demo controls.
+function SimulatedWaveform({ isActive }: { isActive: boolean }) {
+  const [frequencyData, setFrequencyData] = useState<number[]>([])
+  const reduceMotion = useReducedMotion()
+
+  useEffect(() => {
+    if (!isActive || reduceMotion) return
+    let frame = 0
+    let lastUpdate = 0
+    function animate(time: number) {
+      if (time - lastUpdate >= 50) {
+        lastUpdate = time
+        setFrequencyData(
+          Array.from({ length: 256 }, (_, index) => {
+            const envelope = Math.exp(-index / 100)
+            const pulse = 0.5 + 0.5 * Math.sin(time / 450 + index * 0.18)
+            const beat = 0.5 + 0.5 * Math.sin(time / 170 - index * 0.08)
+            return Math.round(18 + 170 * envelope * pulse * beat)
+          }),
+        )
+      }
+      frame = requestAnimationFrame(animate)
+    }
+    frame = requestAnimationFrame(animate)
+    return () => cancelAnimationFrame(frame)
+  }, [isActive, reduceMotion])
+
+  return (
+    <AudioVisualizer
+      isActive={isActive}
+      frequencyData={frequencyData}
+      height={48}
+      ariaLabel="Simulated frequency spectrum"
+    />
   )
 }
