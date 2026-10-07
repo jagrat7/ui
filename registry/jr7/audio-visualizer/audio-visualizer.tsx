@@ -1,10 +1,13 @@
 "use client"
 
-import { AudioVisualizer as AudvisVisualizer } from "audvis"
 import { useReducedMotion } from "motion/react"
-import { useEffect, useRef, useState } from "react"
+import { lazy, Suspense, useEffect, useRef, useState } from "react"
 
 import { cn } from "@/lib/utils"
+
+const AudvisVisualizer = lazy(() =>
+  import("audvis").then((module) => ({ default: module.AudioVisualizer })),
+)
 
 export interface AudioVisualizerProps {
   /** A caller-owned Web Audio analyser. This component never requests audio access. */
@@ -43,10 +46,12 @@ export function AudioVisualizer({
   const barCount = halfBars * 2 - 1
   const stripWidth = (barCount - 1) * 4 + 3
   const active = isActive && !reduceMotion
+  const usesAnalyser = active && Boolean(analyser)
   const hasProgress = progress !== undefined && Number.isFinite(progress)
 
   // Canvas needs a resolved color, rather than a CSS variable or currentColor.
   useEffect(() => {
+    if (!usesAnalyser) return
     function updateColor() {
       if (containerRef.current) setCanvasColor(getComputedStyle(containerRef.current).color)
     }
@@ -64,7 +69,7 @@ export function AudioVisualizer({
     }
     // `color` and `className` change the computed color, so re-read it when they do.
     // oxlint-disable-next-line react/exhaustive-effect-dependencies
-  }, [color, className])
+  }, [usesAnalyser, color, className])
 
   let bars: number[] = []
   if (active && !analyser && frequencyData?.length) {
@@ -96,14 +101,18 @@ export function AudioVisualizer({
       }
     >
       {active && analyser && canvasColor ? (
-        <AudvisVisualizer
-          key={`${drawWidth}:${drawHeight}:${canvasColor}`}
-          analyser={analyser}
-          isActive
-          width={drawWidth}
-          height={drawHeight}
-          color={canvasColor}
-        />
+        <Suspense
+          fallback={<IdleWaveform width={drawWidth} height={drawHeight} stripWidth={stripWidth} />}
+        >
+          <AudvisVisualizer
+            key={`${drawWidth}:${drawHeight}:${canvasColor}`}
+            analyser={analyser}
+            isActive
+            width={drawWidth}
+            height={drawHeight}
+            color={canvasColor}
+          />
+        </Suspense>
       ) : (
         <svg
           viewBox={`0 0 ${drawWidth} ${drawHeight}`}
@@ -136,5 +145,34 @@ export function AudioVisualizer({
         </svg>
       )}
     </div>
+  )
+}
+
+function IdleWaveform({
+  width,
+  height,
+  stripWidth,
+}: {
+  width: number
+  height: number
+  stripWidth: number
+}) {
+  return (
+    <svg
+      viewBox={`0 0 ${width} ${height}`}
+      preserveAspectRatio="none"
+      className="block size-full"
+      aria-hidden="true"
+    >
+      <line
+        x1={0}
+        y1={height / 2}
+        x2={stripWidth}
+        y2={height / 2}
+        stroke="currentColor"
+        strokeWidth={4}
+        strokeDasharray="3 1"
+      />
+    </svg>
   )
 }
