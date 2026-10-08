@@ -31,6 +31,15 @@ export function ComponentSearch({ items }: { items: ComponentEntry[] }) {
   const isMac = React.useSyncExternalStore(subscribeToPlatform, getIsMac, () => false)
 
   React.useEffect(() => {
+    if ("requestIdleCallback" in window) {
+      const handle = requestIdleCallback(preloadSearch, { timeout: 2000 })
+      return () => cancelIdleCallback(handle)
+    }
+    const handle = setTimeout(preloadSearch, 1000)
+    return () => clearTimeout(handle)
+  }, [])
+
+  React.useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
       const shortcutModifier = isMac ? event.metaKey : event.ctrlKey
       if (event.key.toLowerCase() === "k" && shortcutModifier) {
