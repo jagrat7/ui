@@ -10,22 +10,17 @@ const AudvisVisualizer = lazy(() =>
 )
 
 export interface AudioVisualizerProps {
-  /** A caller-owned Web Audio analyser. This component never requests audio access. */
   analyser?: AnalyserNode | null
-  /** Optional byte-frequency samples (0–255), for non-Web-Audio inputs and demos. */
   frequencyData?: readonly number[] | Uint8Array
   isActive: boolean
-  /** Optional playback progress, normalized to 0–1. */
   progress?: number
   width?: number
   height?: number
-  /** Any CSS color. Defaults to the computed text-primary color. */
   color?: string
   className?: string
   ariaLabel?: string
 }
 
-/** Extracted from SpotifyPill's waveform, preserving audvis and its idle strip. */
 export function AudioVisualizer({
   analyser,
   frequencyData,
@@ -49,7 +44,6 @@ export function AudioVisualizer({
   const usesAnalyser = active && Boolean(analyser)
   const hasProgress = progress !== undefined && Number.isFinite(progress)
 
-  // Canvas needs a resolved color, rather than a CSS variable or currentColor.
   useEffect(() => {
     if (!usesAnalyser) return
     function updateColor() {
@@ -67,13 +61,11 @@ export function AudioVisualizer({
       observer.disconnect()
       scheme.removeEventListener("change", updateColor)
     }
-    // `color` and `className` change the computed color, so re-read it when they do.
     // oxlint-disable-next-line react/exhaustive-effect-dependencies
   }, [usesAnalyser, color, className])
 
   let bars: number[] = []
   if (active && !analyser && frequencyData?.length) {
-    // The same nonlinear sampling, mirrored bars, and 3px/1px geometry as audvis.
     const half = Array.from({ length: halfBars }, (_, index) => {
       const dataIndex = Math.floor((index / halfBars) ** 1.5 * frequencyData.length * 0.5)
       const value = frequencyData[dataIndex] ?? 0
