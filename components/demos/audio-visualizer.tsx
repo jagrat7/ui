@@ -146,7 +146,6 @@ export default function AudioVisualizerDemo() {
   )
 }
 
-// Keep the 20 Hz sample updates local to the waveform, rather than the demo controls.
 function SimulatedWaveform({ isActive }: { isActive: boolean }) {
   const [frequencyData, setFrequencyData] = useState<number[]>([])
   const reduceMotion = useReducedMotion()

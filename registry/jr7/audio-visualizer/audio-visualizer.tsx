@@ -61,7 +61,6 @@ export function AudioVisualizer({
       observer.disconnect()
       scheme.removeEventListener("change", updateColor)
     }
-    // oxlint-disable-next-line react/exhaustive-effect-dependencies
   }, [usesAnalyser, color, className])
 
   let bars: number[] = []
