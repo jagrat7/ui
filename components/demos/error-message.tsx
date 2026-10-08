@@ -14,7 +14,7 @@ const DISMISS_SECONDS = 5
 export default function ErrorMessageDemo() {
   const [message, setMessage] = useState<string | null>(SAMPLE_ERROR)
   const previewRef = useRef<HTMLDivElement>(null)
-  const isInView = useInView(previewRef, { amount: 0.5 })
+  const isInView = useInView(previewRef, { amount: 1 })
   const dismiss = useCallback(() => setMessage(null), [])
 
   return (
