@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { Analytics } from "@vercel/analytics/next"
 import { Geist } from "next/font/google"
 import localFont from "next/font/local"
 
@@ -55,6 +56,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <SiteHeader />
           <main className="overflow-x-clip px-2">{children}</main>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   )
