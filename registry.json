@@ -3,20 +3,7 @@
   "name": "jr7",
   "homepage": "https://ui.jr7.dev",
   "items": [
-    {
-      "name": "numbered-pagination",
-      "type": "registry:component",
-      "title": "Numbered Pagination",
-      "description": "Controlled page navigation with nearby pages, first/last links, ellipses, and a fetching state.",
-      "dependencies": ["lucide-react"],
-      "registryDependencies": ["button", "utils"],
-      "files": [
-        {
-          "path": "registry/jr7/numbered-pagination/numbered-pagination.tsx",
-          "type": "registry:component"
-        }
-      ]
-    },
+
     {
       "name": "loading-button",
       "type": "registry:component",
@@ -27,6 +14,20 @@
       "files": [
         {
           "path": "registry/jr7/loading-button/loading-button.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "numbered-pagination",
+      "type": "registry:component",
+      "title": "Numbered Pagination",
+      "description": "Controlled page navigation with nearby pages, first/last links, ellipses, and a fetching state.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["button", "utils"],
+      "files": [
+        {
+          "path": "registry/jr7/numbered-pagination/numbered-pagination.tsx",
           "type": "registry:component"
         }
       ]
