@@ -39,8 +39,8 @@ export default async function Home() {
       })}
 
       <Separator />
-      <footer className="screen-line-top screen-line-bottom flex gap-4 border-x glass px-4 py-6 font-mono text-xs text-muted-foreground">
-        <a href={`${SITE.url}/r/registry.json`} className="hover:text-foreground">
+      <footer className="screen-line-top screen-line-bottom flex justify-center gap-4 border-x glass px-4 py-6 font-mono text-xs text-muted-foreground">
+        <a href={`${SITE.url}/r/registry.json`} className="hover:text-foreground ">
           registry.json
         </a>
       </footer>
