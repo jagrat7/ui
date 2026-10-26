@@ -1,7 +1,7 @@
 {
   "type": "web",
   "title": "jr7/ui",
-  "description": "A shadcn registry of React components I struggled to find elsewhere.",
+  "description": "A registry of UI components I struggled to find elsewhere.",
   "tags": [
     "React",
     "Next.js",
