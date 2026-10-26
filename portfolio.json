@@ -1,0 +1,14 @@
+{
+  "type": "web",
+  "title": "jr7/ui",
+  "description": "A shadcn registry of React components I struggled to find elsewhere.",
+  "tags": [
+    "React",
+    "Next.js",
+    "shadcn"
+  ],
+  "image": "docs/media/showcase.gif",
+  "images": [
+    "docs/media/showcase.gif"
+  ]
+}
