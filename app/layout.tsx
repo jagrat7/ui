@@ -12,11 +12,6 @@ import { ThemeProvider } from "@/components/theme-provider"
 import "./globals.css"
 
 const watchtowerWebsiteId = process.env.NEXT_PUBLIC_WATCHTOWER_WEBSITE_ID
-const watchtowerScriptUrl =
-  process.env.NEXT_PUBLIC_WATCHTOWER_SCRIPT_URL ||
-  "https://watchtower-mu-seven.vercel.app/script.js"
-// Umami posts to `${data-host-url}/api/send`, and without it to the site's own /api/send.
-const watchtowerHostUrl = new URL(".", watchtowerScriptUrl).href.replace(/\/$/, "")
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] })
 
@@ -67,9 +62,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <Analytics />
         {watchtowerWebsiteId && (
           <Script
-            src={watchtowerScriptUrl}
+            src="https://watchtower-mu-seven.vercel.app/script.js"
             data-website-id={watchtowerWebsiteId}
-            data-host-url={watchtowerHostUrl}
             data-exclude-search="true"
             strategy="afterInteractive"
           />

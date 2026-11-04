@@ -200,7 +200,7 @@ pnpm dev
 
 Components live in [`registry/jr7`](registry/jr7) and their metadata in [`registry.json`](registry.json). Run `pnpm registry:build` after editing one to regenerate the JSON. `pnpm build` does that and builds the site.
 
-Page views go to Vercel Web Analytics and, when `NEXT_PUBLIC_WATCHTOWER_WEBSITE_ID` is set, to Watchtower (self-hosted Umami). `NEXT_PUBLIC_WATCHTOWER_SCRIPT_URL` overrides the tracker URL (absolute), which defaults to `https://watchtower-mu-seven.vercel.app/script.js`; page views are sent to `/api/send` next to it. Both are read at build time.
+Page views go to Vercel Web Analytics and, when `NEXT_PUBLIC_WATCHTOWER_WEBSITE_ID` is set, to Watchtower (self-hosted Umami). It's read at build time.
 
 ## Credits
 
