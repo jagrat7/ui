@@ -13,9 +13,10 @@ import "./globals.css"
 
 const watchtowerWebsiteId = process.env.NEXT_PUBLIC_WATCHTOWER_WEBSITE_ID
 const watchtowerScriptUrl =
-  process.env.NEXT_PUBLIC_WATCHTOWER_SCRIPT_URL || "https://watchtower-mu-seven.vercel.app/script.js"
+  process.env.NEXT_PUBLIC_WATCHTOWER_SCRIPT_URL ||
+  "https://watchtower-mu-seven.vercel.app/script.js"
 
-const geistSans =Geist({ variable: "--font-geist-sans", subsets: ["latin"] })
+const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] })
 
 const commitMono = localFont({
   src: "./fonts/CommitMono.woff2",
