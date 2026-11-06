@@ -10,6 +10,7 @@ A shadcn registry of React components I struggled to find elsewhere.
 - [Numbered pagination](#numbered-pagination): page navigation with nearby pages, first/last links, and ellipses.
 - [Audio visualizer](#audio-visualizer): a mirrored waveform driven by a Web Audio analyser or frequency samples.
 - [Error message](#error-message): an inline alert with a close button and optional auto-dismiss.
+- [Minimal scrollbar](#minimal-scrollbar): a thin scrollbar with a transparent track and a faint thumb that brightens on hover.
 
 ## Install
 
@@ -19,7 +20,7 @@ You need a React project already set up for shadcn. The CLI installs each compon
 npx shadcn@latest add https://ui.jr7.dev/r/loading-button.json
 ```
 
-Swap `loading-button` for `numbered-pagination`, `audio-visualizer`, or `error-message`.
+Swap `loading-button` for `numbered-pagination`, `audio-visualizer`, `error-message`, or `minimal-scrollbar`.
 
 Or add the namespace to `components.json` once:
 
@@ -190,6 +191,41 @@ The timer starts when the message appears, even if it's off-screen. Changing the
 It uses `role="alert"`, labels the close button, and skips animations under reduced motion.
 
 [Source](registry/jr7/error-message/error-message.tsx) · [Demo](components/demos/error-message.tsx)
+
+### Minimal scrollbar
+
+A scroll container with a thin scrollbar and a transparent track. The thumb sits at 40% of your `border` colour and goes to full strength while the pointer is over the container. It needs no Tailwind plugin.
+
+```tsx
+import { MinimalScrollbar } from "@/components/minimal-scrollbar"
+
+export function FileList({ files }: { files: string[] }) {
+  return (
+    <MinimalScrollbar className="h-64 rounded-lg border">
+      <ul>
+        {files.map((file) => (
+          <li key={file}>{file}</li>
+        ))}
+      </ul>
+    </MinimalScrollbar>
+  )
+}
+```
+
+For a scroller you can't wrap, like a dialog body or a popover, add the class string to it:
+
+```tsx
+import { minimalScrollbarClassName } from "@/components/minimal-scrollbar"
+
+;<DialogContent className={cn("max-h-[80vh] overflow-y-auto", minimalScrollbarClassName)} />
+```
+
+- `MinimalScrollbar` takes standard `<div>` props and adds `overflow-auto`. Pass `overflow-y-auto overflow-x-hidden` to scroll one axis only.
+- `minimalScrollbarClassName` (`string`): the scrollbar styles alone. You add the overflow.
+
+It uses `scrollbar-width` and `scrollbar-color` where the browser supports them and the WebKit scrollbar pseudo-elements elsewhere. The colours follow your theme's `--color-border`.
+
+[Source](registry/jr7/minimal-scrollbar/minimal-scrollbar.tsx) · [Demo](components/demos/minimal-scrollbar.tsx)
 
 ## Development
 
