@@ -3,13 +3,13 @@ import type { ComponentType } from "react"
 import AudioVisualizerDemo from "./audio-visualizer"
 import ErrorMessageDemo from "./error-message"
 import LoadingButtonDemo from "./loading-button"
-import MinimalScrollbarDemo from "./minimal-scrollbar"
+import ScrollbarStyledDemo from "./scrollbar-styled"
 import NumberedPaginationDemo from "./numbered-pagination"
 
 export const demos: Record<string, ComponentType> = {
   "audio-visualizer": AudioVisualizerDemo,
   "error-message": ErrorMessageDemo,
   "loading-button": LoadingButtonDemo,
-  "minimal-scrollbar": MinimalScrollbarDemo,
+  "scrollbar-styled": ScrollbarStyledDemo,
   "numbered-pagination": NumberedPaginationDemo,
 }

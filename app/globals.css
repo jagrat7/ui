@@ -191,6 +191,11 @@
   @apply bg-[radial-gradient(var(--pattern-foreground)_1px,transparent_0)] bg-size-[8px_8px];
 }
 
+/* Same rule the scrollbar-styled registry item installs. */
+@utility scrollbar-styled {
+  @apply scrollbar-thin scrollbar-thumb-border/40 scrollbar-track-transparent hover:scrollbar-thumb-border;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

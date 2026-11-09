@@ -3,23 +3,22 @@
 import { useState } from "react"
 
 import { Demo, DemoStage, DemoFooter, DemoCaption } from "@/components/demo"
-import { MinimalScrollbar } from "@/registry/jr7/minimal-scrollbar/minimal-scrollbar"
 
 const FILES = Array.from({ length: 40 }, (_, i) => ({
   name: `scene-${String(i + 1).padStart(2, "0")}.pkg`,
   size: `${(((i * 37) % 90) / 10 + 2.4).toFixed(1)} MB`,
 }))
 
-export default function MinimalScrollbarDemo() {
+export default function ScrollbarStyledDemo() {
   const [progress, setProgress] = useState(0)
 
   return (
     <Demo>
       <DemoStage>
-        <MinimalScrollbar
+        <div
           tabIndex={0}
           aria-label="Wallpaper files"
-          className="h-56 w-full max-w-sm rounded-lg border bg-background/60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+          className="h-56 w-full max-w-sm scrollbar-styled overflow-y-auto rounded-lg border bg-background/60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
           onScroll={(event) => {
             const el = event.currentTarget
             const max = el.scrollHeight - el.clientHeight
@@ -34,7 +33,7 @@ export default function MinimalScrollbarDemo() {
               </li>
             ))}
           </ul>
-        </MinimalScrollbar>
+        </div>
       </DemoStage>
       <DemoFooter>
         <DemoCaption>

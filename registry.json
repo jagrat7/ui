@@ -60,17 +60,16 @@
       ]
     },
     {
-      "name": "minimal-scrollbar",
-      "type": "registry:component",
-      "title": "Minimal Scrollbar",
-      "description": "A thin scrollbar on a transparent track whose faint thumb brightens on hover, as a scroll container or a class string.",
-      "registryDependencies": ["utils"],
-      "files": [
-        {
-          "path": "registry/jr7/minimal-scrollbar/minimal-scrollbar.tsx",
-          "type": "registry:component"
+      "name": "scrollbar-styled",
+      "type": "registry:item",
+      "title": "Scrollbar Styled",
+      "description": "A Tailwind utility for a thin scrollbar on a transparent track whose faint thumb brightens on hover. Needs Tailwind 4.3+.",
+      "css": {
+        "@utility scrollbar-styled": {
+          "@apply scrollbar-thin scrollbar-track-transparent scrollbar-thumb-border/40 hover:scrollbar-thumb-border": {}
         }
-      ]
+      },
+      "files": []
     }
   ]
 }
