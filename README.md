@@ -10,7 +10,7 @@ A shadcn registry of React components I struggled to find elsewhere.
 - [Numbered pagination](#numbered-pagination): page navigation with nearby pages, first/last links, and ellipses.
 - [Audio visualizer](#audio-visualizer): a mirrored waveform driven by a Web Audio analyser or frequency samples.
 - [Error message](#error-message): an inline alert with a close button and optional auto-dismiss.
-- [Minimal scrollbar](#minimal-scrollbar): a thin scrollbar with a transparent track and a faint thumb that brightens on hover.
+- [Scrollbar styled](#scrollbar-styled): a Tailwind utility for a thin scrollbar with a transparent track and a faint thumb that brightens on hover.
 
 ## Install
 
@@ -20,7 +20,7 @@ You need a React project already set up for shadcn. The CLI installs each compon
 npx shadcn@latest add https://ui.jr7.dev/r/loading-button.json
 ```
 
-Swap `loading-button` for `numbered-pagination`, `audio-visualizer`, `error-message`, or `minimal-scrollbar`.
+Swap `loading-button` for `numbered-pagination`, `audio-visualizer`, `error-message`, or `scrollbar-styled`.
 
 Or add the namespace to `components.json` once:
 
@@ -192,40 +192,29 @@ It uses `role="alert"`, labels the close button, and skips animations under redu
 
 [Source](registry/jr7/error-message/error-message.tsx) · [Demo](components/demos/error-message.tsx)
 
-### Minimal scrollbar
+### Scrollbar styled
 
-A scroll container with a thin scrollbar and a transparent track. The thumb sits at 40% of your `border` colour and goes to full strength while the pointer is over the container. It needs no Tailwind plugin.
+A Tailwind utility, not a component. Installing it adds this to your `globals.css`:
 
-```tsx
-import { MinimalScrollbar } from "@/components/minimal-scrollbar"
-
-export function FileList({ files }: { files: string[] }) {
-  return (
-    <MinimalScrollbar className="h-64 rounded-lg border">
-      <ul>
-        {files.map((file) => (
-          <li key={file}>{file}</li>
-        ))}
-      </ul>
-    </MinimalScrollbar>
-  )
+```css
+@utility scrollbar-styled {
+  @apply scrollbar-thin scrollbar-thumb-border/40 scrollbar-track-transparent hover:scrollbar-thumb-border;
 }
 ```
 
-For a scroller you can't wrap, like a dialog body or a popover, add the class string to it:
+Put the class on any element that scrolls, including ones you don't render yourself, like a dialog or dropdown:
 
 ```tsx
-import { minimalScrollbarClassName } from "@/components/minimal-scrollbar"
+<div className="scrollbar-styled h-64 overflow-y-auto">{/* … */}</div>
 
-;<DialogContent className={cn("max-h-[80vh] overflow-y-auto", minimalScrollbarClassName)} />
+<DialogContent className="scrollbar-styled max-h-[80vh] overflow-y-auto" />
 ```
 
-- `MinimalScrollbar` takes standard `<div>` props and adds `overflow-auto`. Pass `overflow-y-auto overflow-x-hidden` to scroll one axis only.
-- `minimalScrollbarClassName` (`string`): the scrollbar styles alone. You add the overflow.
+The scrollbar is thin, the track is transparent, and the thumb sits at 40% of your `border` colour until the pointer is over the element, when it goes to full strength. You still set the overflow yourself.
 
-It uses `scrollbar-width` and `scrollbar-color` where the browser supports them and the WebKit scrollbar pseudo-elements elsewhere. The colours follow your theme's `--color-border`.
+It needs Tailwind 4.3 or later, which added the [`scrollbar-width`](https://tailwindcss.com/docs/scrollbar-width) and [`scrollbar-color`](https://tailwindcss.com/docs/scrollbar-color) utilities it's built from. On older versions, the [`tailwind-scrollbar`](https://github.com/adoxography/tailwind-scrollbar) plugin provides the same class names. Don't use both, because they define the same classes.
 
-[Source](registry/jr7/minimal-scrollbar/minimal-scrollbar.tsx) · [Demo](components/demos/minimal-scrollbar.tsx)
+[Demo](components/demos/scrollbar-styled.tsx)
 
 ## Development
 
