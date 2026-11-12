@@ -11,7 +11,8 @@
     "registry:validate": "shadcn registry validate ./public/r/registry.json",
     "lint:fix": "oxlint --fix .",
     "fmt": "oxfmt .",
-    "fmt:check": "oxfmt --check ."
+    "fmt:check": "oxfmt --check .",
+    "design:preset": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/design-preset.ts"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
