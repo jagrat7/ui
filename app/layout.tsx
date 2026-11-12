@@ -5,6 +5,7 @@ import localFont from "next/font/local"
 import Script from "next/script"
 
 import { SITE } from "@/lib/site"
+import { ThemeProvider } from "@/components/theme-provider"
 
 import "./globals.css"
 
@@ -46,7 +47,14 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       suppressHydrationWarning
     >
       <body>
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
         <Analytics />
         {watchtowerWebsiteId && (
           <Script
