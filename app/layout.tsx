@@ -5,8 +5,6 @@ import localFont from "next/font/local"
 import Script from "next/script"
 
 import { SITE } from "@/lib/site"
-import { GlowBackground } from "@/components/glow-background"
-import { SiteHeader } from "@/components/site-header"
 import { ThemeProvider } from "@/components/theme-provider"
 
 import "./globals.css"
@@ -55,9 +53,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           enableSystem
           disableTransitionOnChange
         >
-          <GlowBackground />
-          <SiteHeader />
-          <main className="overflow-x-clip px-2">{children}</main>
+          {children}
         </ThemeProvider>
         <Analytics />
         {watchtowerWebsiteId && (
