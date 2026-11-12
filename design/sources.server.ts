@@ -26,7 +26,8 @@ export function readSources(): Sources {
     // designMd: read("DESIGN.md"),   // if the project has one
     shadcn: JSON.parse(read("components.json")),
     preset: JSON.parse(read(`${DESIGN}/shadcn-preset.gen.json`)),
-    components: readdirSync(join(process.cwd(), UI))
+    // Named from the UI folder down, so a file in a subfolder is `folder/name`.
+    components: readdirSync(join(process.cwd(), UI), { recursive: true, encoding: "utf8" })
       .filter((file) => file.endsWith(".tsx"))
       .map((file) => ({ name: file.slice(0, -".tsx".length), code: read(join(UI, file)) })),
     app: APP.flatMap(files)
