@@ -60,10 +60,13 @@ function Items() {
 
 export default function CommandDemo() {
   const [open, setOpen] = useState(false)
+  // Nothing selected until the pointer or keyboard picks an item: cmdk scrolls the selected item
+  // into view, and on mount that would scroll the whole page down to this demo.
+  const [value, setValue] = useState("")
   return (
     <Rows>
       <Row label="inline" className="block">
-        <Command className="max-w-sm border">
+        <Command className="max-w-sm border" value={value} onValueChange={setValue}>
           <CommandInput placeholder="Search components…" />
           <CommandList>
             <Items />
