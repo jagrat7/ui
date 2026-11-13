@@ -11,6 +11,7 @@ A shadcn registry of React components I struggled to find elsewhere.
 - [Audio visualizer](#audio-visualizer): a mirrored waveform driven by a Web Audio analyser or frequency samples.
 - [Error message](#error-message): an inline alert with a close button and optional auto-dismiss.
 - [Scrollbar styled](#scrollbar-styled): a Tailwind utility for a thin scrollbar with a transparent track and a faint thumb that brightens on hover.
+- [Design page](#design-page): a dev-only `/design` route showing your shadcn preset, palette, type, shape and every component in light and dark.
 
 ## Install
 
@@ -20,7 +21,7 @@ You need a React project already set up for shadcn. The CLI installs each compon
 npx shadcn@latest add https://ui.jr7.dev/r/loading-button.json
 ```
 
-Swap `loading-button` for `numbered-pagination`, `audio-visualizer`, `error-message`, or `scrollbar-styled`.
+Swap `loading-button` for `numbered-pagination`, `audio-visualizer`, `error-message`, or `scrollbar-styled`. The design page has its own commands: see [below](#design-page).
 
 Or add the namespace to `components.json` once:
 
@@ -215,6 +216,39 @@ The scrollbar is thin, the track is transparent, and the thumb sits at 40% of yo
 It needs Tailwind 4.3 or later, which added the [`scrollbar-width`](https://tailwindcss.com/docs/scrollbar-width) and [`scrollbar-color`](https://tailwindcss.com/docs/scrollbar-color) utilities it's built from. On older versions, the [`tailwind-scrollbar`](https://github.com/adoxography/tailwind-scrollbar) plugin provides the same class names. Don't use both, because they define the same classes.
 
 [Demo](components/demos/scrollbar-styled.tsx)
+
+### Design page
+
+A `/design` route for development only. It reads your stylesheet, `components.json` and UI folder and shows the shadcn preset, every colour token, the type scale, radius, and each component in light and dark side by side. Each component's file name, and every file that uses it (the "N uses" menu), opens in your editor. Outside development the route answers 404 and none of its code is in the build.
+
+![The design page](public/design-page/light.webp)
+
+Pick the item for your bundler:
+
+```bash
+# Next.js, App Router
+npx shadcn@latest add https://ui.jr7.dev/r/design-page-next.json
+
+# Vite with TanStack Router (TanStack Start included)
+npx shadcn@latest add https://ui.jr7.dev/r/design-page-vite.json
+```
+
+Both add a `design/` folder (under `src/` if you have one), the route, `scripts/design-preset.ts`, the `Sortable` component, and the shadcn `button` and `dropdown-menu`. Then:
+
+1. Point `design/sources.server.ts` (Next.js) or `design/sources.ts` (Vite) at your stylesheet and folders. The defaults are `app/globals.css`, `components/ui`, and `src/app/globals.css` for Vite.
+2. Set `OUT` in `scripts/design-preset.ts` to where `shadcn-preset.gen.json` is, and run it: `bun scripts/design-preset.ts`.
+3. Fill in `design/project.tsx`: name, logo, colour roles, type styles.
+4. Write a `design/demos/<name>.demo.tsx` for each file in your UI folder and for your own components worth showing. The page lists the components that have none.
+
+To update the page later without touching your own files (`project.tsx`, `ui.ts`, the sources, the demos):
+
+```bash
+npx shadcn@latest add https://ui.jr7.dev/r/design-page.json --overwrite
+```
+
+It can't place itself in a monorepo whose UI lives in its own package: the files land in the app, but their imports still say `@/components/ui/...`, so change those to your UI package. The Vite item's route is for TanStack Router's file routes; with another router, write the route yourself (lazy-load `design/index.tsx` behind `import.meta.env.DEV`).
+
+[Shared page files](design) · [Starter files](registry/jr7/design-page)
 
 ## Development
 

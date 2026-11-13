@@ -24,7 +24,27 @@ const codeColors = {
 
 export type RegistryItem = (typeof registry.items)[number]
 
-export const items = registry.items
+/** A picture of an item that can't be shown live (the design page only exists in development). */
+export type ItemPreview = {
+  light: string
+  dark: string
+  width: number
+  height: number
+  docs: string
+}
+export type ItemMeta = {
+  /** Listed under another item instead of on its own. */
+  partOf?: string
+  preview?: ItemPreview
+  /** Install commands to show in place of the item's own, each for one of its variants. */
+  installs?: { label: string; name: string }[]
+}
+
+export const metaOf = (item: RegistryItem): ItemMeta =>
+  "meta" in item ? (item.meta as ItemMeta) : {}
+
+/** The items the site lists, each with its own panel. */
+export const items = registry.items.filter((item) => !metaOf(item).partOf)
 
 export function highlightCode(code: string, lang: "tsx" | "css" = "tsx") {
   return codeToHtml(code, {
@@ -50,6 +70,8 @@ function cssRulesToText(rules: CssRules, depth = 0): string {
 }
 
 export async function getItemSource(item: RegistryItem) {
+  // Shown as a picture: its files are a whole page, not something to read in a tab.
+  if (metaOf(item).preview) return []
   const css = "css" in item ? (item.css as CssRules) : undefined
   const cssCode = css ? `${cssRulesToText(css)}\n` : null
   const cssSource = cssCode
