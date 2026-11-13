@@ -271,7 +271,7 @@
       "name": "design-page",
       "type": "registry:item",
       "title": "Design Page",
-      "description": "A dev-only /design page that shows a shadcn project's preset, palette, type, shape and every component, in light and dark side by side. Install it with design-page-next or design-page-vite; this item updates an installed page without touching the project's own files.",
+      "description": "A dev-only /design page: your shadcn preset, colours, type and every component, in light and dark.",
       "dependencies": [
         "@dnd-kit/core",
         "@dnd-kit/modifiers",

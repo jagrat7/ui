@@ -32,11 +32,13 @@ export default async function Home() {
                 <PanelDescription>{item.description}</PanelDescription>
               </PanelHeader>
               <PanelContent className="space-y-4">
-                {preview ? (
-                  <ItemPicture title={item.title} preview={preview} />
-                ) : (
-                  <ComponentPreview files={sources[i]}>{Demo ? <Demo /> : null}</ComponentPreview>
-                )}
+                <ComponentPreview files={sources[i]}>
+                  {preview ? (
+                    <ItemPicture title={item.title} preview={preview} />
+                  ) : Demo ? (
+                    <Demo />
+                  ) : null}
+                </ComponentPreview>
                 {installs ? (
                   installs.map((install) => (
                     <div key={install.name} className="space-y-1.5">

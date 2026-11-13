@@ -70,8 +70,6 @@ function cssRulesToText(rules: CssRules, depth = 0): string {
 }
 
 export async function getItemSource(item: RegistryItem) {
-  // Shown as a picture: its files are a whole page, not something to read in a tab.
-  if (metaOf(item).preview) return []
   const css = "css" in item ? (item.css as CssRules) : undefined
   const cssCode = css ? `${cssRulesToText(css)}\n` : null
   const cssSource = cssCode

@@ -6,11 +6,8 @@ import type { ItemPreview } from "@/lib/registry"
 export function ItemPicture({ title, preview }: { title: string; preview: ItemPreview }) {
   const { light, dark, width, height, docs } = preview
   return (
-    <figure className="space-y-2">
-      <a
-        href={docs}
-        className="block overflow-hidden rounded-xl border bg-background/80 transition-opacity hover:opacity-90"
-      >
+    <figure>
+      <a href={docs} className="block transition-opacity hover:opacity-90">
         <Image
           src={light}
           alt={`${title}, light`}
@@ -26,7 +23,7 @@ export function ItemPicture({ title, preview }: { title: string; preview: ItemPr
           className="hidden dark:block"
         />
       </a>
-      <figcaption className="font-mono text-xs text-muted-foreground">
+      <figcaption className="border-t px-4 py-2 font-mono text-xs text-muted-foreground">
         A picture: the page only runs in development.{" "}
         <a href={docs} className="text-foreground underline-offset-4 hover:underline">
           How it works
