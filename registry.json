@@ -106,11 +106,6 @@
           "target": "design/demo.tsx"
         },
         {
-          "path": "design/icons.tsx",
-          "type": "registry:file",
-          "target": "design/icons.tsx"
-        },
-        {
           "path": "components/ui/sortable.tsx",
           "type": "registry:ui"
         },
@@ -204,11 +199,6 @@
           "target": "design/demo.tsx"
         },
         {
-          "path": "design/icons.tsx",
-          "type": "registry:file",
-          "target": "design/icons.tsx"
-        },
-        {
           "path": "components/ui/sortable.tsx",
           "type": "registry:ui"
         },
@@ -299,11 +289,6 @@
           "path": "design/demo.tsx",
           "type": "registry:file",
           "target": "design/demo.tsx"
-        },
-        {
-          "path": "design/icons.tsx",
-          "type": "registry:file",
-          "target": "design/icons.tsx"
         },
         {
           "path": "components/ui/sortable.tsx",

@@ -6,14 +6,14 @@ const registry = JSON.parse(readFileSync(new URL("../registry.json", import.meta
 const item = (name) => registry.items.find((entry) => entry.name === name)
 const targets = (name) => item(name).files.map((file) => file.target ?? file.path)
 
-const SHARED = ["page.tsx", "tokens.ts", "types.ts", "demo.tsx", "icons.tsx"]
+const SHARED = ["page.tsx", "tokens.ts", "types.ts", "demo.tsx"]
 
 test("every file an item lists exists", () => {
   for (const entry of registry.items)
     for (const file of entry.files) assert.ok(existsSync(file.path), `${entry.name}: ${file.path}`)
 })
 
-test("the design page items take the five shared files from design/, not a copy", () => {
+test("the design page items take the four shared files from design/, not a copy", () => {
   for (const name of ["design-page", "design-page-next", "design-page-vite"]) {
     const paths = item(name).files.map((file) => file.path)
     for (const shared of SHARED) assert.ok(paths.includes(`design/${shared}`), `${name}: ${shared}`)
