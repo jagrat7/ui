@@ -25,5 +25,13 @@
         "case": "kebabCase"
       }
     ]
-  }
+  },
+  "overrides": [
+    {
+      "files": ["registry/jr7/design-page/vite/**"],
+      "rules": {
+        "nextjs/no-html-link-for-pages": "off"
+      }
+    }
+  ]
 }

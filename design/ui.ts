@@ -10,3 +10,16 @@ export {
 } from "@/components/ui/dropdown-menu"
 export { Sortable, SortableHandle, SortableItem } from "@/components/ui/sortable"
 export { cn } from "@/lib/utils"
+
+export {
+  Blocks,
+  ChevronRight,
+  ChevronsDownUp,
+  ChevronsUpDown,
+  Menu,
+  Moon,
+  MousePointer2,
+  Search,
+  Shapes,
+  Sun,
+} from "lucide-react"

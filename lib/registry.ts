@@ -24,7 +24,23 @@ const codeColors = {
 
 export type RegistryItem = (typeof registry.items)[number]
 
-export const items = registry.items
+export type ItemPreview = {
+  light: string
+  dark: string
+  width: number
+  height: number
+  docs: string
+}
+export type ItemMeta = {
+  partOf?: string
+  preview?: ItemPreview
+  installs?: { label: string; name: string }[]
+}
+
+export const metaOf = (item: RegistryItem): ItemMeta =>
+  "meta" in item ? (item.meta as ItemMeta) : {}
+
+export const items = registry.items.filter((item) => !metaOf(item).partOf)
 
 export function highlightCode(code: string, lang: "tsx" | "css" = "tsx") {
   return codeToHtml(code, {
@@ -63,7 +79,7 @@ export async function getItemSource(item: RegistryItem) {
       // Keep the preview and clipboard framework-neutral; installed files retain the RSC boundary.
       const code = source.replace(/^(?:"use client"|'use client');?\r?\n(?:\r?\n)?/, "")
       const html = await highlightCode(code, file.path.endsWith(".css") ? "css" : "tsx")
-      return { name: path.basename(file.path), code, html }
+      return { name: ("target" in file && file.target) || path.basename(file.path), code, html }
     }),
   )
 

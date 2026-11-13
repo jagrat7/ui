@@ -12,6 +12,7 @@ const UI = "components/ui"
 /** The folders whose files can import a component. Not the design page's own. */
 const APP = ["app", "components", "lib", "registry"]
 const DESIGN = "design"
+const STARTERS = "registry/jr7/design-page"
 
 const read = (path: string) => readFileSync(join(process.cwd(), path), "utf8")
 const files = (dir: string) =>
@@ -35,7 +36,7 @@ export function readSources(): Sources {
         file: join(UI, file),
       })),
     app: APP.flatMap(files)
-      .filter((path) => !path.startsWith(`app/${DESIGN}/`))
+      .filter((path) => !path.startsWith(`app/${DESIGN}/`) && !path.startsWith(`${STARTERS}/`))
       .map((path) => ({ path, code: read(path) })),
   }
 }
