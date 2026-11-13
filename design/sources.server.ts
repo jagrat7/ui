@@ -29,7 +29,11 @@ export function readSources(): Sources {
     // Named from the UI folder down, so a file in a subfolder is `folder/name`.
     components: readdirSync(join(process.cwd(), UI), { recursive: true, encoding: "utf8" })
       .filter((file) => file.endsWith(".tsx"))
-      .map((file) => ({ name: file.slice(0, -".tsx".length), code: read(join(UI, file)) })),
+      .map((file) => ({
+        name: file.slice(0, -".tsx".length),
+        code: read(join(UI, file)),
+        file: join(UI, file),
+      })),
     app: APP.flatMap(files)
       .filter((path) => !path.startsWith(`app/${DESIGN}/`))
       .map((path) => ({ path, code: read(path) })),
