@@ -1,6 +1,3 @@
-// Written to work with both shadcn's Radix and Base UI styles: the trigger takes the button's
-// look from buttonVariants instead of `asChild` (Radix) or `render` (Base UI).
-
 import { buttonVariants } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -18,10 +15,10 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { ChevronDown } from "lucide-react"
 import { useState } from "react"
 
 import { Row, Rows, type DemoMeta } from "../demo"
+import { ChevronsUpDown } from "../ui"
 
 export const meta: DemoMeta = { title: "Dropdown menu", components: ["dropdown-menu"] }
 
@@ -35,7 +32,7 @@ export default function DropdownMenuDemo() {
         <DropdownMenu>
           <DropdownMenuTrigger className={buttonVariants({ variant: "outline" })}>
             My account
-            <ChevronDown />
+            <ChevronsUpDown />
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56" align="start">
             <DropdownMenuGroup>

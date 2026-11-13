@@ -12,7 +12,6 @@ const UI = "components/ui"
 /** The folders whose files can import a component. Not the design page's own. */
 const APP = ["app", "components", "lib", "registry"]
 const DESIGN = "design"
-/** The registry's copy of the page's starter files, which are not uses either. */
 const STARTERS = "registry/jr7/design-page"
 
 const read = (path: string) => readFileSync(join(process.cwd(), path), "utf8")

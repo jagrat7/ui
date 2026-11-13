@@ -74,14 +74,13 @@
     {
       "name": "design-page-next",
       "type": "registry:item",
-      "title": "Design Page (Next.js)",
-      "description": "A dev-only /design page showing a shadcn project's preset, palette, type, shape and every component in light and dark side by side. For the Next.js App Router.",
+      "title": "Design Page",
+      "description": "A dev-only /design page: your shadcn preset, colours, type and every component, in light and dark. For Next.js; design-page-vite is the Vite version.",
       "dependencies": [
         "@dnd-kit/core",
         "@dnd-kit/modifiers",
         "@dnd-kit/sortable",
-        "@dnd-kit/utilities",
-        "lucide-react"
+        "@dnd-kit/utilities"
       ],
       "registryDependencies": ["button", "dropdown-menu", "utils"],
       "files": [
@@ -161,20 +160,35 @@
         }
       ],
       "meta": {
-        "partOf": "design-page"
+        "preview": {
+          "light": "/design-page/light.webp",
+          "dark": "/design-page/dark.webp",
+          "width": 1400,
+          "height": 813,
+          "docs": "https://github.com/jagrat7/ui#design-page"
+        },
+        "installs": [
+          {
+            "label": "Next.js",
+            "name": "design-page-next"
+          },
+          {
+            "label": "Vite + TanStack Router",
+            "name": "design-page-vite"
+          }
+        ]
       }
     },
     {
       "name": "design-page-vite",
       "type": "registry:item",
       "title": "Design Page (Vite)",
-      "description": "A dev-only /design page showing a shadcn project's preset, palette, type, shape and every component in light and dark side by side. For Vite with TanStack Router.",
+      "description": "A dev-only /design page: your shadcn preset, colours, type and every component, in light and dark. For Vite with TanStack Router.",
       "dependencies": [
         "@dnd-kit/core",
         "@dnd-kit/modifiers",
         "@dnd-kit/sortable",
-        "@dnd-kit/utilities",
-        "lucide-react"
+        "@dnd-kit/utilities"
       ],
       "registryDependencies": ["button", "dropdown-menu", "utils"],
       "files": [
@@ -254,69 +268,7 @@
         }
       ],
       "meta": {
-        "partOf": "design-page"
-      }
-    },
-    {
-      "name": "design-page",
-      "type": "registry:item",
-      "title": "Design Page",
-      "description": "A dev-only /design page: your shadcn preset, colours, type and every component, in light and dark.",
-      "dependencies": [
-        "@dnd-kit/core",
-        "@dnd-kit/modifiers",
-        "@dnd-kit/sortable",
-        "@dnd-kit/utilities",
-        "lucide-react"
-      ],
-      "files": [
-        {
-          "path": "design/page.tsx",
-          "type": "registry:file",
-          "target": "design/page.tsx"
-        },
-        {
-          "path": "design/tokens.ts",
-          "type": "registry:file",
-          "target": "design/tokens.ts"
-        },
-        {
-          "path": "design/types.ts",
-          "type": "registry:file",
-          "target": "design/types.ts"
-        },
-        {
-          "path": "design/demo.tsx",
-          "type": "registry:file",
-          "target": "design/demo.tsx"
-        },
-        {
-          "path": "components/ui/sortable.tsx",
-          "type": "registry:ui"
-        }
-      ],
-      "meta": {
-        "preview": {
-          "light": "/design-page/light.webp",
-          "dark": "/design-page/dark.webp",
-          "width": 1400,
-          "height": 813,
-          "docs": "https://github.com/jagrat7/ui#design-page"
-        },
-        "installs": [
-          {
-            "label": "Next.js",
-            "name": "design-page-next"
-          },
-          {
-            "label": "Vite + TanStack Router",
-            "name": "design-page-vite"
-          },
-          {
-            "label": "Update",
-            "name": "design-page"
-          }
-        ]
+        "partOf": "design-page-next"
       }
     }
   ]

@@ -14,7 +14,7 @@ test("every file an item lists exists", () => {
 })
 
 test("the design page items take the four shared files from design/, not a copy", () => {
-  for (const name of ["design-page", "design-page-next", "design-page-vite"]) {
+  for (const name of ["design-page-next", "design-page-vite"]) {
     const paths = item(name).files.map((file) => file.path)
     for (const shared of SHARED) assert.ok(paths.includes(`design/${shared}`), `${name}: ${shared}`)
     assert.ok(paths.includes("components/ui/sortable.tsx"), `${name}: sortable`)
@@ -38,18 +38,10 @@ test("each bundler's item carries its own files and none of the other's", () => 
   }
 })
 
-test("the update item leaves the project's own files alone", () => {
-  const own = ["design/project.tsx", "design/ui.ts", "design/shadcn-preset.gen.json"]
-  for (const file of own) assert.ok(!targets("design-page").includes(file), file)
-  for (const file of item("design-page").files) assert.doesNotMatch(file.path, /\/demos\//)
-})
-
 test("the design page items need the page's components", () => {
   for (const name of ["design-page-next", "design-page-vite"])
     assert.deepEqual(item(name).registryDependencies, ["button", "dropdown-menu", "utils"])
-  // Updating with --overwrite would otherwise overwrite the project's own button and menu.
-  assert.equal(item("design-page").registryDependencies, undefined)
-  for (const name of ["design-page", "design-page-next", "design-page-vite"]) {
+  for (const name of ["design-page-next", "design-page-vite"]) {
     for (const dep of [
       "@dnd-kit/core",
       "@dnd-kit/modifiers",
@@ -58,4 +50,9 @@ test("the design page items need the page's components", () => {
     ])
       assert.ok(item(name).dependencies.includes(dep), `${name}: ${dep}`)
   }
+})
+
+test("the design page items leave the icon library to the project", () => {
+  for (const name of ["design-page-next", "design-page-vite"])
+    assert.ok(!item(name).dependencies.includes("lucide-react"), name)
 })

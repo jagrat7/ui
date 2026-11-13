@@ -24,7 +24,6 @@ const codeColors = {
 
 export type RegistryItem = (typeof registry.items)[number]
 
-/** A picture of an item that can't be shown live (the design page only exists in development). */
 export type ItemPreview = {
   light: string
   dark: string
@@ -33,17 +32,14 @@ export type ItemPreview = {
   docs: string
 }
 export type ItemMeta = {
-  /** Listed under another item instead of on its own. */
   partOf?: string
   preview?: ItemPreview
-  /** Install commands to show in place of the item's own, each for one of its variants. */
   installs?: { label: string; name: string }[]
 }
 
 export const metaOf = (item: RegistryItem): ItemMeta =>
   "meta" in item ? (item.meta as ItemMeta) : {}
 
-/** The items the site lists, each with its own panel. */
 export const items = registry.items.filter((item) => !metaOf(item).partOf)
 
 export function highlightCode(code: string, lang: "tsx" | "css" = "tsx") {
@@ -83,7 +79,7 @@ export async function getItemSource(item: RegistryItem) {
       // Keep the preview and clipboard framework-neutral; installed files retain the RSC boundary.
       const code = source.replace(/^(?:"use client"|'use client');?\r?\n(?:\r?\n)?/, "")
       const html = await highlightCode(code, file.path.endsWith(".css") ? "css" : "tsx")
-      return { name: path.basename(file.path), code, html }
+      return { name: ("target" in file && file.target) || path.basename(file.path), code, html }
     }),
   )
 

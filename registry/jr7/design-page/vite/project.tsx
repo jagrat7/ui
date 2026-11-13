@@ -1,6 +1,3 @@
-// What only this project can say about itself, for the design page (page.tsx). The rest the
-// page reads from the project's files (sources.ts).
-
 import type { DemoModule, Project } from "./types"
 
 export const project: Project = {
@@ -12,10 +9,7 @@ export const project: Project = {
   ),
   uiImport: "@/components/ui",
   demos: Object.values(import.meta.glob<DemoModule>("./demos/*.demo.tsx", { eager: true })),
-  // Vite's own opener. It wants the path from the folder the dev server runs in: put a `../`
-  // in front for each folder between there and the repo root.
   editor: (file) => `/__open-in-editor?file=${encodeURIComponent(file)}`,
-  // theme: { dark: { attribute: "data-theme", value: "dark" }, storageKey: "theme" },
 
   roles: [
     { name: "Background", token: "background", use: "bg-background" },
@@ -30,7 +24,6 @@ export const project: Project = {
     { name: "Focus", token: "ring", use: "ring-ring" },
   ],
 
-  // Leave this out if DESIGN.md's front matter has `typography:`.
   typography: [
     { name: "title", classes: "text-3xl font-bold tracking-tight" },
     { name: "heading", classes: "text-lg font-semibold" },

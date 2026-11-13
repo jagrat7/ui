@@ -1,12 +1,7 @@
-// What only this project can say about itself, for the design page (page.tsx). The rest the
-// page reads from the project's files (sources.server.ts).
-
 import Link from "next/link"
 
 import type { DemoModule, Project } from "./types"
 
-// Next.js has no import.meta.glob: Turbopack and webpack both have require.context
-// (require-context.d.ts types it).
 const found = require.context("./demos", false, /\.demo\.tsx$/)
 
 export const project: Project = {
@@ -18,9 +13,7 @@ export const project: Project = {
   ),
   uiImport: "@/components/ui",
   demos: found.keys().map((key) => found(key) as DemoModule),
-  // Next.js's own opener. It wants the path from the project folder (where package.json is).
   editor: (file) => `/__nextjs_launch-editor?file=${encodeURIComponent(file)}`,
-  // theme: { dark: { attribute: "data-theme", value: "dark" }, storageKey: "theme" },
 
   roles: [
     { name: "Background", token: "background", use: "bg-background" },
@@ -35,7 +28,6 @@ export const project: Project = {
     { name: "Focus", token: "ring", use: "ring-ring" },
   ],
 
-  // Leave this out if DESIGN.md's front matter has `typography:`.
   typography: [
     { name: "title", classes: "text-3xl font-bold tracking-tight" },
     { name: "heading", classes: "text-lg font-semibold" },

@@ -11,8 +11,6 @@ export {
 export { Sortable, SortableHandle, SortableItem } from "@/components/ui/sortable"
 export { cn } from "@/lib/utils"
 
-// The page's own icons, from the project's icon library, under these names. Another library's
-// are renamed on the way: `RiSearchLine as Search`.
 export {
   Blocks,
   ChevronRight,

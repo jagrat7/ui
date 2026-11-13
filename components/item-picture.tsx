@@ -2,7 +2,6 @@ import Image from "next/image"
 
 import type { ItemPreview } from "@/lib/registry"
 
-/** A still of an item that has no live preview here, in the site's theme, linking to its docs. */
 export function ItemPicture({ title, preview }: { title: string; preview: ItemPreview }) {
   const { light, dark, width, height, docs } = preview
   return (

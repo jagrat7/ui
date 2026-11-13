@@ -228,9 +228,9 @@ npx shadcn@latest add https://ui.jr7.dev/r/design-page-vite.json   # Vite + TanS
 
 Then point `design/sources.server.ts` (or `sources.ts`) at your stylesheet and folders, set `OUT` in `scripts/design-preset.ts` and run it, and add a demo in `design/demos/` per component. The page lists the ones still missing.
 
-To update the page later without touching your own files (`project.tsx`, `ui.ts`, the sources, the demos), add `design-page` with `--overwrite`.
+To update the page later, run the same command with `--overwrite` and put back your own `project.tsx`, `ui.ts`, sources, demos and preset JSON (`git checkout` them).
 
-In a monorepo with a separate UI package, change the `@/components/ui/...` imports in `design/` to your package.
+The page's icons come through `design/ui.ts` from `lucide-react`; with another icon library, rename them there. In a monorepo with a separate UI package, change the `@/components/ui/...` imports in `design/` to your package.
 
 [Shared page files](design) · [Starter files](registry/jr7/design-page)
 

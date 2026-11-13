@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Bookmark, Search, Trash2 } from "lucide-react"
 
 import { Row, Rows, type DemoMeta } from "../demo"
+import { ChevronRight, Menu, Search, Shapes } from "../ui"
 
 export const meta: DemoMeta = { title: "Button", components: ["button"] }
 
@@ -29,19 +29,19 @@ export default function ButtonDemo() {
         </Button>
         <Button variant="outline">
           Open
-          <ArrowRight data-icon="inline-end" />
+          <ChevronRight data-icon="inline-end" />
         </Button>
-        <Button size="icon-xs" variant="outline" aria-label="Save">
-          <Bookmark />
+        <Button size="icon-xs" variant="outline" aria-label="Shapes">
+          <Shapes />
         </Button>
-        <Button size="icon-sm" variant="outline" aria-label="Save">
-          <Bookmark />
+        <Button size="icon-sm" variant="outline" aria-label="Shapes">
+          <Shapes />
         </Button>
-        <Button size="icon" variant="outline" aria-label="Save">
-          <Bookmark />
+        <Button size="icon" variant="outline" aria-label="Shapes">
+          <Shapes />
         </Button>
-        <Button size="icon-lg" variant="destructive" aria-label="Move to Trash">
-          <Trash2 />
+        <Button size="icon-lg" variant="destructive" aria-label="Menu">
+          <Menu />
         </Button>
       </Row>
       <Row label="disabled">

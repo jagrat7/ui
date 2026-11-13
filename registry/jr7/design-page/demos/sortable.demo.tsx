@@ -34,7 +34,6 @@ export default function SortableDemo() {
         >
           {chips.map((chip) => (
             <SortableItem key={chip} value={chip}>
-              {/* The whole chip is the handle. */}
               <SortableHandle
                 className="size-auto rounded-md border-border bg-card px-3 py-1 text-xs text-foreground"
                 aria-label={`Move ${chip}`}
