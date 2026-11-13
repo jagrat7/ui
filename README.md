@@ -10,6 +10,7 @@ A shadcn registry of React components I struggled to find elsewhere.
 - [Numbered pagination](#numbered-pagination): page navigation with nearby pages, first/last links, and ellipses.
 - [Audio visualizer](#audio-visualizer): a mirrored waveform driven by a Web Audio analyser or frequency samples.
 - [Error message](#error-message): an inline alert with a close button and optional auto-dismiss.
+- [Scrollbar styled](#scrollbar-styled): a Tailwind utility for a thin scrollbar with a transparent track and a faint thumb that brightens on hover.
 
 ## Install
 
@@ -19,7 +20,7 @@ You need a React project already set up for shadcn. The CLI installs each compon
 npx shadcn@latest add https://ui.jr7.dev/r/loading-button.json
 ```
 
-Swap `loading-button` for `numbered-pagination`, `audio-visualizer`, or `error-message`.
+Swap `loading-button` for `numbered-pagination`, `audio-visualizer`, `error-message`, or `scrollbar-styled`.
 
 Or add the namespace to `components.json` once:
 
@@ -190,6 +191,30 @@ The timer starts when the message appears, even if it's off-screen. Changing the
 It uses `role="alert"`, labels the close button, and skips animations under reduced motion.
 
 [Source](registry/jr7/error-message/error-message.tsx) · [Demo](components/demos/error-message.tsx)
+
+### Scrollbar styled
+
+A Tailwind utility, not a component. Installing it adds this to your `globals.css`:
+
+```css
+@utility scrollbar-styled {
+  @apply scrollbar-thin scrollbar-thumb-border/40 scrollbar-track-transparent hover:scrollbar-thumb-border;
+}
+```
+
+Put the class on any element that scrolls, including ones you don't render yourself, like a dialog or dropdown:
+
+```tsx
+<div className="scrollbar-styled h-64 overflow-y-auto">{/* … */}</div>
+
+<DialogContent className="scrollbar-styled max-h-[80vh] overflow-y-auto" />
+```
+
+The scrollbar is thin, the track is transparent, and the thumb sits at 40% of your `border` colour until the pointer is over the element, when it goes to full strength. You still set the overflow yourself.
+
+It needs Tailwind 4.3 or later, which added the [`scrollbar-width`](https://tailwindcss.com/docs/scrollbar-width) and [`scrollbar-color`](https://tailwindcss.com/docs/scrollbar-color) utilities it's built from. On older versions, the [`tailwind-scrollbar`](https://github.com/adoxography/tailwind-scrollbar) plugin provides the same class names. Don't use both, because they define the same classes.
+
+[Demo](components/demos/scrollbar-styled.tsx)
 
 ## Development
 

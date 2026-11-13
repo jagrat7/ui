@@ -34,8 +34,29 @@ export function highlightCode(code: string, lang: "tsx" | "css" = "tsx") {
   })
 }
 
+type CssRules = { [selector: string]: CssRules | string }
+
+/** Prints a registry item's `css` rules as the CSS the shadcn CLI writes into globals.css. */
+function cssRulesToText(rules: CssRules, depth = 0): string {
+  const indent = "  ".repeat(depth)
+  return Object.entries(rules)
+    .map(([key, value]) => {
+      if (typeof value === "string") return `${indent}${key}: ${value};`
+      // An empty block is a bare at-rule statement such as `@apply …` or `@plugin …`.
+      if (Object.keys(value).length === 0) return `${indent}${key};`
+      return `${indent}${key} {\n${cssRulesToText(value, depth + 1)}\n${indent}}`
+    })
+    .join(depth === 0 ? "\n\n" : "\n")
+}
+
 export async function getItemSource(item: RegistryItem) {
-  return Promise.all(
+  const css = "css" in item ? (item.css as CssRules) : undefined
+  const cssCode = css ? `${cssRulesToText(css)}\n` : null
+  const cssSource = cssCode
+    ? [{ name: "globals.css", code: cssCode, html: await highlightCode(cssCode, "css") }]
+    : []
+
+  const fileSources = await Promise.all(
     item.files.map(async (file) => {
       const relative = path.relative("registry", file.path)
       const source = await fs.readFile(path.join(process.cwd(), "registry", relative), "utf8")
@@ -45,4 +66,6 @@ export async function getItemSource(item: RegistryItem) {
       return { name: path.basename(file.path), code, html }
     }),
   )
+
+  return [...cssSource, ...fileSources]
 }

@@ -3,7 +3,6 @@
   "name": "jr7",
   "homepage": "https://ui.jr7.dev",
   "items": [
-
     {
       "name": "loading-button",
       "type": "registry:component",
@@ -59,6 +58,18 @@
           "type": "registry:component"
         }
       ]
+    },
+    {
+      "name": "scrollbar-styled",
+      "type": "registry:item",
+      "title": "Scrollbar Styled",
+      "description": "A Tailwind utility for a thin scrollbar on a transparent track whose faint thumb brightens on hover. Needs Tailwind 4.3+.",
+      "css": {
+        "@utility scrollbar-styled": {
+          "@apply scrollbar-thin scrollbar-track-transparent scrollbar-thumb-border/40 hover:scrollbar-thumb-border": {}
+        }
+      },
+      "files": []
     }
   ]
 }
