@@ -6,8 +6,8 @@ import { ThemeToggle } from "@/components/theme-toggle"
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-50 overflow-x-clip px-2">
-      <div className="screen-line-bottom mx-auto flex h-(--header-height) items-center gap-3 border-x glass pr-2 pl-4 md:max-w-3xl">
+    <header className="sticky top-0 z-50 border-b border-line glass px-2">
+      <div className="mx-auto flex h-(--header-height) items-center gap-3 pr-2 pl-4 md:max-w-3xl">
         <span className="font-mono text-sm font-medium">
           <a href={SITE.home} className="text-muted-foreground hover:text-foreground">
             jagrat7

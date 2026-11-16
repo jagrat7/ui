@@ -8,7 +8,7 @@ export default function SiteLayout({ children }: Readonly<{ children: React.Reac
     <>
       <GlowBackground />
       <SiteHeader />
-      <main className="overflow-x-clip px-2">{children}</main>
+      <main className="px-2">{children}</main>
     </>
   )
 }
