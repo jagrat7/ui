@@ -70,6 +70,206 @@
         }
       },
       "files": []
+    },
+    {
+      "name": "design-page-next",
+      "type": "registry:item",
+      "title": "Design Page",
+      "description": "A dev-only /design page: your shadcn preset, colours, type and every component, in light and dark. For Next.js; design-page-vite is the Vite version.",
+      "dependencies": [
+        "@dnd-kit/core",
+        "@dnd-kit/modifiers",
+        "@dnd-kit/sortable",
+        "@dnd-kit/utilities"
+      ],
+      "registryDependencies": ["button", "dropdown-menu", "utils"],
+      "files": [
+        {
+          "path": "design/page.tsx",
+          "type": "registry:file",
+          "target": "design/page.tsx"
+        },
+        {
+          "path": "design/tokens.ts",
+          "type": "registry:file",
+          "target": "design/tokens.ts"
+        },
+        {
+          "path": "design/types.ts",
+          "type": "registry:file",
+          "target": "design/types.ts"
+        },
+        {
+          "path": "design/demo.tsx",
+          "type": "registry:file",
+          "target": "design/demo.tsx"
+        },
+        {
+          "path": "components/ui/sortable.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/jr7/design-page/ui.ts",
+          "type": "registry:file",
+          "target": "design/ui.ts"
+        },
+        {
+          "path": "registry/jr7/design-page/design-preset.ts",
+          "type": "registry:file",
+          "target": "~/scripts/design-preset.ts"
+        },
+        {
+          "path": "registry/jr7/design-page/shadcn-preset.gen.json",
+          "type": "registry:file",
+          "target": "design/shadcn-preset.gen.json"
+        },
+        {
+          "path": "registry/jr7/design-page/demos/button.demo.tsx",
+          "type": "registry:file",
+          "target": "design/demos/button.demo.tsx"
+        },
+        {
+          "path": "registry/jr7/design-page/demos/dropdown-menu.demo.tsx",
+          "type": "registry:file",
+          "target": "design/demos/dropdown-menu.demo.tsx"
+        },
+        {
+          "path": "registry/jr7/design-page/demos/sortable.demo.tsx",
+          "type": "registry:file",
+          "target": "design/demos/sortable.demo.tsx"
+        },
+        {
+          "path": "registry/jr7/design-page/next/project.tsx",
+          "type": "registry:file",
+          "target": "design/project.tsx"
+        },
+        {
+          "path": "registry/jr7/design-page/next/sources.server.ts",
+          "type": "registry:file",
+          "target": "design/sources.server.ts"
+        },
+        {
+          "path": "registry/jr7/design-page/next/require-context.d.ts",
+          "type": "registry:file",
+          "target": "design/require-context.d.ts"
+        },
+        {
+          "path": "registry/jr7/design-page/next/route.next.tsx",
+          "type": "registry:page",
+          "target": "app/design/page.tsx"
+        }
+      ],
+      "meta": {
+        "preview": {
+          "light": "/design-page/light.webp",
+          "dark": "/design-page/dark.webp",
+          "width": 1400,
+          "height": 813,
+          "docs": "https://github.com/jagrat7/ui#design-page"
+        },
+        "installs": [
+          {
+            "label": "Next.js",
+            "name": "design-page-next"
+          },
+          {
+            "label": "Vite + TanStack Router",
+            "name": "design-page-vite"
+          }
+        ]
+      }
+    },
+    {
+      "name": "design-page-vite",
+      "type": "registry:item",
+      "title": "Design Page (Vite)",
+      "description": "A dev-only /design page: your shadcn preset, colours, type and every component, in light and dark. For Vite with TanStack Router.",
+      "dependencies": [
+        "@dnd-kit/core",
+        "@dnd-kit/modifiers",
+        "@dnd-kit/sortable",
+        "@dnd-kit/utilities"
+      ],
+      "registryDependencies": ["button", "dropdown-menu", "utils"],
+      "files": [
+        {
+          "path": "design/page.tsx",
+          "type": "registry:file",
+          "target": "design/page.tsx"
+        },
+        {
+          "path": "design/tokens.ts",
+          "type": "registry:file",
+          "target": "design/tokens.ts"
+        },
+        {
+          "path": "design/types.ts",
+          "type": "registry:file",
+          "target": "design/types.ts"
+        },
+        {
+          "path": "design/demo.tsx",
+          "type": "registry:file",
+          "target": "design/demo.tsx"
+        },
+        {
+          "path": "components/ui/sortable.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/jr7/design-page/ui.ts",
+          "type": "registry:file",
+          "target": "design/ui.ts"
+        },
+        {
+          "path": "registry/jr7/design-page/design-preset.ts",
+          "type": "registry:file",
+          "target": "~/scripts/design-preset.ts"
+        },
+        {
+          "path": "registry/jr7/design-page/shadcn-preset.gen.json",
+          "type": "registry:file",
+          "target": "design/shadcn-preset.gen.json"
+        },
+        {
+          "path": "registry/jr7/design-page/demos/button.demo.tsx",
+          "type": "registry:file",
+          "target": "design/demos/button.demo.tsx"
+        },
+        {
+          "path": "registry/jr7/design-page/demos/dropdown-menu.demo.tsx",
+          "type": "registry:file",
+          "target": "design/demos/dropdown-menu.demo.tsx"
+        },
+        {
+          "path": "registry/jr7/design-page/demos/sortable.demo.tsx",
+          "type": "registry:file",
+          "target": "design/demos/sortable.demo.tsx"
+        },
+        {
+          "path": "registry/jr7/design-page/vite/project.tsx",
+          "type": "registry:file",
+          "target": "design/project.tsx"
+        },
+        {
+          "path": "registry/jr7/design-page/vite/sources.ts",
+          "type": "registry:file",
+          "target": "design/sources.ts"
+        },
+        {
+          "path": "registry/jr7/design-page/vite/index.tsx",
+          "type": "registry:file",
+          "target": "design/index.tsx"
+        },
+        {
+          "path": "registry/jr7/design-page/vite/route.tanstack.tsx",
+          "type": "registry:file",
+          "target": "routes/design.tsx"
+        }
+      ],
+      "meta": {
+        "partOf": "design-page-next"
+      }
     }
   ]
 }

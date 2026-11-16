@@ -11,6 +11,7 @@ A shadcn registry of React components I struggled to find elsewhere.
 - [Audio visualizer](#audio-visualizer): a mirrored waveform driven by a Web Audio analyser or frequency samples.
 - [Error message](#error-message): an inline alert with a close button and optional auto-dismiss.
 - [Scrollbar styled](#scrollbar-styled): a Tailwind utility for a thin scrollbar with a transparent track and a faint thumb that brightens on hover.
+- [Design page](#design-page): a dev-only `/design` route showing your shadcn preset, palette, type, shape and every component in light and dark.
 
 ## Install
 
@@ -20,7 +21,7 @@ You need a React project already set up for shadcn. The CLI installs each compon
 npx shadcn@latest add https://ui.jr7.dev/r/loading-button.json
 ```
 
-Swap `loading-button` for `numbered-pagination`, `audio-visualizer`, `error-message`, or `scrollbar-styled`.
+Swap `loading-button` for `numbered-pagination`, `audio-visualizer`, `error-message`, or `scrollbar-styled`. The design page has its own commands: see [below](#design-page).
 
 Or add the namespace to `components.json` once:
 
@@ -215,6 +216,23 @@ The scrollbar is thin, the track is transparent, and the thumb sits at 40% of yo
 It needs Tailwind 4.3 or later, which added the [`scrollbar-width`](https://tailwindcss.com/docs/scrollbar-width) and [`scrollbar-color`](https://tailwindcss.com/docs/scrollbar-color) utilities it's built from. On older versions, the [`tailwind-scrollbar`](https://github.com/adoxography/tailwind-scrollbar) plugin provides the same class names. Don't use both, because they define the same classes.
 
 [Demo](components/demos/scrollbar-styled.tsx)
+
+### Design page
+
+A `/design` route for development only: your shadcn preset, colours, type, radius and every component, in light and dark side by side. File names open in your editor. In production the route is a 404 and its code isn't in the build.
+
+```bash
+npx shadcn@latest add https://ui.jr7.dev/r/design-page-next.json   # Next.js
+npx shadcn@latest add https://ui.jr7.dev/r/design-page-vite.json   # Vite + TanStack Router
+```
+
+Then point `design/sources.server.ts` (or `sources.ts`) at your stylesheet and folders, set `OUT` in `scripts/design-preset.ts` and run it, and add a demo in `design/demos/` per component. The page lists the ones still missing.
+
+To update the page later, run the same command with `--overwrite` and put back your own `project.tsx`, `ui.ts`, sources, demos and preset JSON (`git checkout` them).
+
+The page's icons come through `design/ui.ts` from `lucide-react`; with another icon library, rename them there. In a monorepo with a separate UI package, change the `@/components/ui/...` imports in `design/` to your package.
+
+[Shared page files](design) · [Starter files](registry/jr7/design-page)
 
 ## Development
 

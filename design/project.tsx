@@ -22,6 +22,8 @@ export const project: Project = {
   demos: found.keys().map((key) => found(key) as DemoModule),
   // next-themes: the `.dark` class on <html>, and the visitor's choice under "theme".
   theme: { storageKey: "theme" },
+  // Next.js's own opener, with the path from the project folder (the repo root here).
+  editor: (file) => `/__nextjs_launch-editor?file=${encodeURIComponent(file)}`,
 
   roles: [
     { name: "Background", token: "background", use: "bg-background" },

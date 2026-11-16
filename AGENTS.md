@@ -13,5 +13,5 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 `/design` (dev only: `pnpm dev`, then open `/design`) shows the design system as it is now: the shadcn preset, the palette and type from `app/globals.css`, and every component in light and dark side by side. It lives in `design/`, and its route is `app/design/page.tsx`.
 
 - A new file in `components/ui`, or a new registry component in `registry/`, needs a demo: `design/demos/<name>.demo.tsx`. The page lists components that have no demo yet.
-- `page.tsx`, `tokens.ts`, `types.ts`, `demo.tsx` and `icons.tsx` in `design/` are the shared template from the `design-page` skill: change them there, not here. This project's own settings are in `design/project.tsx` and `design/sources.server.ts`.
+- `page.tsx`, `tokens.ts`, `types.ts` and `demo.tsx` in `design/` are the shared template from the `design-page` skill: change them there, not here. This project's own settings are in `design/project.tsx` and `design/sources.server.ts`.
 - After changing `components.json` or the theme, run `pnpm design:preset` to rewrite `design/shadcn-preset.gen.json`.
