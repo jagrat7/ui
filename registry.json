@@ -75,7 +75,7 @@
       "name": "design-page-next",
       "type": "registry:item",
       "title": "Design Page",
-      "description": "A dev-only /design page: your shadcn preset, colours, type and every component, in light and dark. For Next.js; design-page-vite is the Vite version.",
+      "description": "A dev-only /design page: your shadcn preset, colours, type and every component, in light and dark.",
       "dependencies": [
         "@dnd-kit/core",
         "@dnd-kit/modifiers",
