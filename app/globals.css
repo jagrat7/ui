@@ -156,36 +156,6 @@
   @apply bg-card backdrop-blur-surface;
 }
 
-/* Full-bleed hairlines and dividers (structure inspired by chanhdai.com). */
-@utility screen-line-top {
-  @apply relative;
-  &::before {
-    content: "";
-    @apply absolute top-0 left-[-100vw] -z-1 h-px w-[200vw] bg-line;
-  }
-}
-
-@utility screen-line-bottom {
-  @apply relative;
-  &::after {
-    content: "";
-    @apply absolute bottom-0 left-[-100vw] -z-1 h-px w-[200vw] bg-line;
-  }
-}
-
-@utility diagonal-stripes {
-  @apply [--pattern-foreground:var(--color-line)];
-  @apply bg-[repeating-linear-gradient(315deg,var(--pattern-foreground)_0,var(--pattern-foreground)_1px,transparent_0,transparent_50%)] bg-size-[10px_10px];
-}
-
-@utility stripe-divider {
-  @apply relative h-8;
-  &::before {
-    content: "";
-    @apply absolute left-[-100vw] -z-1 h-full w-[200vw] diagonal-stripes;
-  }
-}
-
 @utility dot-grid {
   @apply [--pattern-foreground:color-mix(in_oklab,var(--color-foreground)_10%,transparent)];
   @apply bg-[radial-gradient(var(--pattern-foreground)_1px,transparent_0)] bg-size-[8px_8px];

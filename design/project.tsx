@@ -31,7 +31,7 @@ export const project: Project = {
     { name: "Popover", token: "popover", use: "bg-popover" },
     { name: "Subtle", token: "muted", use: "bg-muted · bg-secondary · bg-accent" },
     { name: "Line", token: "border", use: "border-border" },
-    { name: "Hairline", token: "line", use: "bg-line · screen-line-* · stripe-divider" },
+    { name: "Hairline", token: "line", use: "bg-line · border-line" },
     { name: "Field", token: "input", use: "border-input" },
     { name: "Muted", token: "muted-foreground", use: "text-muted-foreground" },
     { name: "Ink", token: "foreground", use: "text-foreground" },
@@ -41,7 +41,7 @@ export const project: Project = {
   ],
 
   typography: [
-    { name: "panel title", classes: "text-2xl font-medium tracking-tight text-balance" },
+    { name: "panel title", classes: "text-3xl font-medium tracking-tight text-balance" },
     { name: "dialog title", classes: "text-lg leading-none font-semibold" },
     { name: "body", classes: "text-sm" },
     { name: "description", classes: "text-sm text-balance text-muted-foreground" },

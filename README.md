@@ -247,7 +247,7 @@ Page views go to Vercel Web Analytics and, when `NEXT_PUBLIC_WATCHTOWER_WEBSITE_
 
 ## Credits
 
-- [chanhdai.com](https://github.com/ncdai/chanhdai.com) (MIT): panel layout adapted from here. The page dividers and circular theme reveal were inspired by it.
+- [chanhdai.com](https://github.com/ncdai/chanhdai.com) (MIT): the circular theme reveal was inspired by it.
 - [VengeanceUI](https://github.com/Ashutoshx7/VengeanceUI) (MIT): the package manager picker.
 - [shadcn/ui](https://ui.shadcn.com): base components and registry tooling.
 - Commit Mono by Eigil Nikolajsen (SIL OFL 1.1): the monospace font. [License](app/fonts/CommitMono-LICENSE.txt).
